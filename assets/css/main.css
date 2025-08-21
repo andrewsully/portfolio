@@ -918,6 +918,10 @@ section,
   margin-bottom: 1.5rem;
 }
 
+.about .about-content .description p b {
+  color: var(--heading-color);
+}
+
 .about .about-content .description p:last-child {
   margin-bottom: 0;
 }

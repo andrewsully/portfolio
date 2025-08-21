@@ -51,7 +51,13 @@
   const preloader = document.querySelector('#preloader');
   if (preloader) {
     window.addEventListener('load', () => {
-      preloader.remove();
+      // Add fade-out class to trigger CSS transition
+      preloader.classList.add('fade-out');
+      
+      // Remove the element after transition completes
+      setTimeout(() => {
+        preloader.remove();
+      }, 600); // Match the CSS transition duration (0.6s = 600ms)
     });
   }
 

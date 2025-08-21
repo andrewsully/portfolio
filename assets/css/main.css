@@ -2477,6 +2477,13 @@ body.has-mouse .cartoon-eyes {
   }
 }
 
+/* Hide cartoon eyes on touch devices */
+@media (hover: none) {
+  .cartoon-eyes {
+    display: none !important;
+  }
+}
+
 /*=============================================
 =            PORTFOLIO INTERACTIONS           =
 =============================================*/

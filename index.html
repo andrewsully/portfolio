@@ -7,7 +7,7 @@
   ======================================================== -->
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Index - SnapFolio Bootstrap Template</title>
+  <title>Andrew Sullivan - Portfolio</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
 
@@ -38,15 +38,6 @@
   * MAIN CSS FILE
   ======================================================== -->
   <link href="assets/css/main.css" rel="stylesheet">
-
-  <!-- =======================================================
-  * TEMPLATE INFO
-  * Template Name: SnapFolio
-  * Template URL: https://bootstrapmade.com/snapfolio-bootstrap-portfolio-template/
-  * Updated: Jul 21 2025 with Bootstrap v5.3.7
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 </head>
 
 <body class="index-page">
@@ -1792,9 +1783,6 @@ document.getElementById("projectModal").addEventListener("hidden.bs.modal", () =
       });
     }
 
-    // 3) Re-init GLightbox for new items
-    //if (window.GLightbox) GLightbox({ selector: ".glightbox" });
-
     // 4) Refresh AOS so animations apply
     if (window.AOS && AOS.refresh) AOS.refresh();
   });
@@ -1861,44 +1849,6 @@ document.getElementById("projectModal").addEventListener("hidden.bs.modal", () =
     });
   });
 </script>
-<!-- <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const collapseEl = document.getElementById('collapsable-aboutme');
-  const headingEl  = document.getElementById('funfacts-top');
-
-  if (!collapseEl || !headingEl) return;
-
-  // Stash & remove AOS attrs so they don't fire until we say so
-  const aosNodes = Array.from(collapseEl.querySelectorAll('[data-aos]'));
-  aosNodes.forEach(el => {
-    el.dataset._aos = el.getAttribute('data-aos');
-    if (el.hasAttribute('data-aos-delay'))    el.dataset._aosDelay    = el.getAttribute('data-aos-delay');
-    if (el.hasAttribute('data-aos-duration')) el.dataset._aosDuration = el.getAttribute('data-aos-duration');
-    el.removeAttribute('data-aos');
-    el.removeAttribute('data-aos-delay');
-    el.removeAttribute('data-aos-duration');
-    el.classList.remove('aos-init','aos-animate');
-  });
-
-  function restoreAOS() {
-    aosNodes.forEach(el => {
-      if (el.dataset._aos)         el.setAttribute('data-aos', el.dataset._aos);
-      if (el.dataset._aosDelay)    el.setAttribute('data-aos-delay', el.dataset._aosDelay);
-      if (el.dataset._aosDuration) el.setAttribute('data-aos-duration', el.dataset._aosDuration);
-    });
-    if (window.AOS && AOS.refreshHard) AOS.refreshHard();
-  }
-
-  collapseEl.addEventListener('shown.bs.collapse', () => {
-    // 1) scroll the heading to the top
-    headingEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-    // 2) after the scroll has (mostly) finished, restore and animate
-    const delay = window.matchMedia('(prefers-reduced-motion: no-preference)').matches ? 600 : 0;
-    setTimeout(restoreAOS, delay);
-  });
-});
-</script> -->
 
   <!-- =======================================================
   * MODAL ANIMATION HANDLERS
@@ -1930,8 +1880,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   window.addEventListener('mousemove', arm, { passive: true });
 
-  // Respect devices without fine pointer
-  if (!matchMedia('(pointer: fine)').matches) return;
+  // Respect devices without fine pointer or hover capability
+  if (!matchMedia('(pointer: fine)').matches || matchMedia('(hover: none)').matches) return;
 
   // Collect every overlay on the page
   const overlays = [...document.querySelectorAll('.cartoon-eyes')].map(eyesWrap => {

@@ -1688,18 +1688,37 @@ document.getElementById("projectModal").addEventListener("hidden.bs.modal", () =
       bubble.classList.remove('show');
       requestAnimationFrame(() => bubble.classList.add('fade'));
 
-      // remove after transition completes (guard + fallback)
-      const onEnd = (e) => {
-        if (e.target !== bubble) return;      // ignore child img events
-        bubble.removeEventListener('transitionend', onEnd);
-        bubble.remove();
-      };
-      bubble.addEventListener('transitionend', onEnd, { once: true });
-      setTimeout(() => bubble.remove(), 2000); // safety fallback
+      // Keep the element in DOM for hover functionality
+      // Don't remove it, just hide it
+      setTimeout(() => {
+        bubble.style.display = 'none';
+      }, 1000);
     };
 
     setTimeout(dismiss, holdMs);
     bubble.addEventListener('click', dismiss, { once: true });
+
+    // Add hover functionality after initial dismissal
+    setTimeout(() => {
+      const container = document.getElementById('library-hours');
+      
+      container.addEventListener('mouseenter', () => {
+        if (bubble.style.display === 'none') {
+          bubble.style.display = 'block';
+          bubble.style.opacity = '0';
+          requestAnimationFrame(() => {
+            bubble.style.opacity = '1';
+          });
+        }
+      });
+
+      container.addEventListener('mouseleave', () => {
+        bubble.style.opacity = '0';
+        setTimeout(() => {
+          bubble.style.display = 'none';
+        }, 300);
+      });
+    }, holdMs + 1000);
   }
 
   /* ▲▲ REPLACE THIS FUNCTION ONLY ▲▲ */

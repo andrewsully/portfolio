@@ -2695,6 +2695,12 @@ body.has-mouse .cartoon-eyes {
   transition-delay: 0s;
 }
 
+/* Hover effect to show cartoon quote - simple fade */
+#library-hours:hover .once-bubble {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
 /* Mobile tweak */
 @media (max-width: 576px) {
   #library-hours .once-bubble {
@@ -2843,9 +2849,9 @@ body.has-mouse .cartoon-eyes {
 }
 
 /* Contact section paragraph styling */
-.contact .container p {
+/* .contact .container p {
   color: var(--accent-color);
-}
+} */
 
 /* Testimonials button styling to match About Me */
 .testimonials .container .btn {

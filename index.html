@@ -1496,7 +1496,9 @@
       },
       // Additional safety check to prevent loop warnings
       allowTouchMove: hasMultipleSlides,
-      watchSlidesProgress: hasMultipleSlides
+      watchSlidesProgress: hasMultipleSlides,
+      // Explicitly disable loop for single slides to prevent warnings
+      loopedSlides: hasMultipleSlides ? undefined : 0
     });
   }
 

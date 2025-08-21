@@ -2599,6 +2599,10 @@ body.has-mouse .cartoon-eyes {
   backdrop-filter: none;
 }
 
+.portfolio-wrap.viewed .portfolio-info {
+  background: transparent;
+}
+
 .portfolio-wrap.viewed:hover::before,
 .portfolio-wrap.viewed:focus-within::before {
   opacity: 0;

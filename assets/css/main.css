@@ -1,4 +1,4 @@
-/**
+/*
 * Template Name: SnapFolio
 * Template URL: https://bootstrapmade.com/snapfolio-bootstrap-portfolio-template/
 * Updated: Jul 21 2025 with Bootstrap v5.3.7
@@ -399,7 +399,7 @@ a:hover {
   left: calc(50% - 60px);
   width: 120px;
   height: 120px;
-  background-image: url('/assets/img/cartoonloader.png');
+  background-image: url('../img/cartoonloader.png');
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;

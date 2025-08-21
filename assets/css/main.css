@@ -2836,6 +2836,17 @@ body.has-mouse .cartoon-eyes {
   font-weight: 400;
 }
 
+/* Patch Notes subtitle styling to match lead paragraph color */
+#funfacts-top p {
+  color: var(--accent-color);
+  margin-top: 6px;
+}
+
+/* Contact section paragraph styling */
+.contact .container p {
+  color: var(--accent-color);
+}
+
 /* Testimonials button styling to match About Me */
 .testimonials .container .btn {
   padding: 0.875rem 2rem;

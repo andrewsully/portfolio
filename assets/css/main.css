@@ -2809,12 +2809,24 @@ body.has-mouse .cartoon-eyes {
   padding-bottom: 60px !important;
 }
 
+/* Mobile spacing for testimonials section */
+@media (max-width: 768px) {
+  .ff-section {
+    padding-top: 1px !important;
+  }
+}
+
 .aboutme-photo {
   padding: 2.25rem;
 }
 
 /* Scroll margin for smooth scrolling */
 #funfacts-top {
+  scroll-margin-top: 80px;
+}
+
+/* Testimonials section scroll margin */
+#testimonials {
   scroll-margin-top: 80px;
 }
 

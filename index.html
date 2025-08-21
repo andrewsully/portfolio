@@ -7,7 +7,7 @@
   ======================================================== -->
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Andrew Sullivan - Portfolio</title>
+  <title>Andrew Sullivan's Portfolio</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
 
@@ -217,7 +217,7 @@
                   <i class="bi bi-chat-dots"></i>
                   Let's Talk
                 </a>
-                <a href="#testimonials" class="btn btn-outline">
+                <a href="#testimonials" class="btn btn-outline" onclick="scrollToTestimonials(event)">
                   <i class="bi bi-person-vcard"></i>
                   Fun Facts
                 </a>
@@ -1837,6 +1837,26 @@ document.getElementById("projectModal").addEventListener("hidden.bs.modal", () =
   * SMOOTH SCROLLING FOR FUN FACTS
   ======================================================== -->
   <script>
+  // Custom scroll function for testimonials section
+  function scrollToTestimonials(event) {
+    event.preventDefault();
+    const testimonialsSection = document.getElementById('testimonials');
+    const teaserSection = testimonialsSection.querySelector('.container.my-5');
+    
+    if (testimonialsSection && teaserSection) {
+      // Calculate the position to center the teaser section
+      const testimonialsTop = testimonialsSection.offsetTop;
+      const teaserHeight = teaserSection.offsetHeight;
+      const windowHeight = window.innerHeight;
+      const scrollPosition = testimonialsTop + (teaserHeight / 2) - (windowHeight / 2);
+      
+      window.scrollTo({
+        top: scrollPosition,
+        behavior: 'smooth'
+      });
+    }
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
     const collapseEl = document.getElementById('collapsable-aboutme');
     const headingEl  = document.getElementById('funfacts-top');

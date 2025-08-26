@@ -3456,6 +3456,7 @@ section,
   color: var(--contrast-color);
   border-color: var(--accent-color);
   transition: all 0.3s ease;
+  padding-bottom: 0.5rem;
 }
 
 .btn-debug:hover {

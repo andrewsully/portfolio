@@ -1084,6 +1084,7 @@ section,
 @media (max-width: 768px) {
   .about .about-content .section-header h2 { font-size: 1.875rem; }
   .about .details-grid .detail-row { grid-template-columns: 1fr; gap: 1rem; }
+  .about .container { padding-left: 12px; padding-right: 12px; }
 }
 
 /*=============================================
@@ -1508,7 +1509,7 @@ section,
 }
 
 .resume-btn {
-  padding: 2px 5px;
+  padding: 0px 5px;
   font-size: 12px;
   font-weight: 600;
   border-radius: 5px;

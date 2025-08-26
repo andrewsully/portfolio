@@ -1965,18 +1965,22 @@ document.getElementById("projectModal").addEventListener("hidden.bs.modal", () =
         const testimonialContent = container.closest('.testimonial-content');
         const title = testimonialContent.querySelector('h4').textContent;
         
-        // Open carousel with these images
-        openCarousel(images, title);
+        // Find the index of the clicked image
+        const clickedImageSrc = photo.src;
+        const clickedIndex = images.indexOf(clickedImageSrc);
+        
+        // Open carousel with these images, starting with the clicked image
+        openCarousel(images, title, clickedIndex);
       });
     });
 
-    function openCarousel(images, title) {
+    function openCarousel(images, title, startIndex = 0) {
       currentImages = images;
-      currentIndex = 0;
+      currentIndex = startIndex;
       currentTitle = title;
       
       // Update modal content
-      modalImage.src = images[0];
+      modalImage.src = images[startIndex];
       modalTitle.textContent = title;
       
       // Create indicators

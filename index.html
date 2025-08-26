@@ -1995,7 +1995,7 @@ document.getElementById("projectModal").addEventListener("hidden.bs.modal", () =
       // Create indicators
       createIndicators(images.length);
       
-      // Show modal
+      // Show modal with animation
       modal.classList.add('show');
       document.body.style.overflow = 'hidden';
       
@@ -2015,8 +2015,9 @@ document.getElementById("projectModal").addEventListener("hidden.bs.modal", () =
     }
 
     function updateNavigationButtons() {
-      prevBtn.disabled = currentIndex === 0;
-      nextBtn.disabled = currentIndex === currentImages.length - 1;
+      // Remove disabled states - buttons always work
+      prevBtn.disabled = false;
+      nextBtn.disabled = false;
       
       // Update indicators
       const indicators = indicatorsContainer.querySelectorAll('.carousel-indicator');
@@ -2034,20 +2035,25 @@ document.getElementById("projectModal").addEventListener("hidden.bs.modal", () =
     }
 
     function nextImage() {
-      if (currentIndex < currentImages.length - 1) {
-        goToImage(currentIndex + 1);
-      }
+      // Circular navigation - go to first image if at the end
+      const nextIndex = currentIndex === currentImages.length - 1 ? 0 : currentIndex + 1;
+      goToImage(nextIndex);
     }
 
     function prevImage() {
-      if (currentIndex > 0) {
-        goToImage(currentIndex - 1);
-      }
+      // Circular navigation - go to last image if at the beginning
+      const prevIndex = currentIndex === 0 ? currentImages.length - 1 : currentIndex - 1;
+      goToImage(prevIndex);
     }
 
     function closeCarousel() {
+      // Start exit animation
       modal.classList.remove('show');
-      document.body.style.overflow = '';
+      
+      // Wait for animation to complete before hiding
+      setTimeout(() => {
+        document.body.style.overflow = '';
+      }, 400); // Match the transition duration
     }
 
     // Event listeners

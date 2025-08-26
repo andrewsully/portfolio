@@ -3084,3 +3084,18 @@ section,
   font-style: italic;
   font-weight: 600;
 } 
+
+/* Debug button styling to match View My Work button */
+.btn-debug {
+  background-color: var(--accent-color);
+  color: var(--contrast-color);
+  border-color: var(--accent-color);
+  transition: all 0.3s ease;
+}
+
+.btn-debug:hover {
+  background-color: color-mix(in srgb, var(--accent-color), black 10%);
+  color: var(--contrast-color);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px color-mix(in srgb, var(--accent-color), transparent 70%);
+}

@@ -2859,8 +2859,9 @@ body.has-mouse .cartoon-eyes {
   z-index: 1;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
   transform: translate(var(--tx, 0), var(--ty, 0)) scale(1);
-  pointer-events: none;
+  pointer-events: auto;
   will-change: transform;
+  cursor: pointer;
 }
 
 .testimonials .client-image .circular-photo:not(:first-child) {
@@ -2887,6 +2888,191 @@ body.has-mouse .cartoon-eyes {
   transform: translate(var(--tx, 0), var(--ty, 0)) scale(4);
 }
 
+/* Carousel Modal Styles */
+.carousel-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  backdrop-filter: blur(5px);
+}
+
+.carousel-modal.show {
+  display: flex;
+}
+
+.carousel-container {
+  background-color: var(--surface-color);
+  border-radius: 20px;
+  /* padding: 2rem; */
+  max-width: 60vh; 
+  max-height: 80vh;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  position: relative;
+  border: 1px solid color-mix(in srgb, var(--default-color), transparent 92%);
+  display: flex;
+  flex-direction: column;
+}
+
+.carousel-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(0, 0, 0, 0.6);
+  border: none;
+  font-size: 1.5rem;
+  color: white;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(5px);
+  z-index: 15;
+}
+
+.carousel-close:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  transform: scale(1.1);
+}
+
+.carousel-header {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 0;
+  right: 0;
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: auto;
+  z-index: 10;
+}
+
+.carousel-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: white;
+  margin: 0;
+  text-align: center;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.carousel-image-container {
+  flex: 1;
+  min-height: 0;
+  border-radius: 15px;
+  overflow: hidden;
+  position: relative;
+  background-color: color-mix(in srgb, var(--default-color), transparent 95%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+}
+
+.carousel-image-container::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 6rem;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 5;
+}
+
+.carousel-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.carousel-image:hover {
+  transform: scale(1.05);
+}
+
+.carousel-navigation {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+  pointer-events: none;
+}
+
+.carousel-nav-btn {
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1.2rem;
+  pointer-events: auto;
+  backdrop-filter: blur(5px);
+}
+
+.carousel-nav-btn:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+  transform: scale(1.1);
+}
+
+.carousel-nav-btn:disabled {
+  background-color: rgba(0, 0, 0, 0.3);
+  cursor: not-allowed;
+  transform: none;
+}
+
+.carousel-indicators {
+  position: absolute;
+  bottom: 0rem;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  pointer-events: auto;
+  z-index: 10;
+}
+
+.carousel-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.carousel-indicator.active {
+  background-color: white;
+  transform: scale(1.2);
+  border-color: white;
+}
+
 /* Mobile size adjustments */
 @media (max-width: 767.98px) {
   .testimonials .client-image .circular-photo {
@@ -2895,6 +3081,48 @@ body.has-mouse .cartoon-eyes {
   }
   .testimonials .client-image .circular-photo:not(:first-child) {
     margin-left: -10px;
+  }
+  
+  .carousel-container {
+    padding: 1.5rem;
+    max-width: 90vw;
+    max-height: 90vh;
+  }
+  
+  .carousel-image-container::after {
+    height: 5rem;
+  }
+  
+  .carousel-header {
+    bottom: 3rem;
+    padding: 0.75rem 1rem;
+  }
+  
+  .carousel-title {
+    font-size: 0.9rem;
+  }
+  
+  .carousel-close {
+    top: 0.75rem;
+    left: 0.75rem;
+    width: 35px;
+    height: 35px;
+    font-size: 1.2rem;
+  }
+  
+  .carousel-nav-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+  
+  .carousel-indicators {
+    bottom: 0.75rem;
+  }
+  
+  .carousel-indicator {
+    width: 8px;
+    height: 8px;
   }
 }
 
@@ -2970,11 +3198,6 @@ body.has-mouse .cartoon-eyes {
   color: var(--accent-color);
   margin-top: 6px;
 }
-
-/* Contact section paragraph styling */
-/* .contact .container p {
-  color: var(--accent-color);
-} */
 
 /* Testimonials button styling to match About Me */
 .testimonials .container .btn {
@@ -3052,21 +3275,6 @@ section,
 }
 
 /* Highlight background for bold text */
-/* .highlight-text {
-  color: color-mix(in srgb, var(--default-color), transparent 20%);
-  font-style: italic;
-  font-weight: 600;
-  text-decoration: underline;
-  text-decoration-color: color-mix(in srgb, var(--contrast-color) 80%, var(--heading-color) 20%);
-  text-decoration-thickness: 0.35rem;
-  text-underline-offset: 0.2rem;
-  text-decoration-skip-ink: none;
-
-  f2c14b = gold
-  f07c8b = pink
-} */
-
-
 .highlight-text-primary {
   color: color-mix(in srgb, var(--default-color), transparent 0%);
   font-style: italic;
@@ -3077,7 +3285,6 @@ section,
   text-underline-offset: 0.15rem;
   text-decoration-skip-ink: none;
 } 
-
 
 .highlight-text-secondary {
   color: color-mix(in srgb, var(--default-color), transparent 0%);

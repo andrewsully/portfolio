@@ -828,6 +828,32 @@
     </section><!-- End Testimonials Section -->
 
     <!-- =======================================================
+    * CAROUSEL MODAL
+    ======================================================== -->
+    <div id="carouselModal" class="carousel-modal">
+      <div class="carousel-container">
+        <button class="carousel-close" id="carouselClose">
+          <i class="bi bi-x"></i>
+        </button>
+        <div class="carousel-image-container">
+          <img id="carouselImage" class="carousel-image" src="" alt="Carousel Image">
+          <div class="carousel-navigation">
+            <button class="carousel-nav-btn" id="carouselPrev">
+              <i class="bi bi-chevron-left"></i>
+            </button>
+            <button class="carousel-nav-btn" id="carouselNext">
+              <i class="bi bi-chevron-right"></i>
+            </button>
+          </div>
+          <div class="carousel-header">
+            <h3 class="carousel-title" id="carouselTitle"></h3>
+          </div>
+          <div class="carousel-indicators" id="carouselIndicators"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =======================================================
     * CONTACT SECTION
     ======================================================== -->
     <section id="contact" class="contact section">
@@ -1906,6 +1932,138 @@ document.getElementById("projectModal").addEventListener("hidden.bs.modal", () =
     collapseEl.addEventListener('shown.bs.collapse', () => {
       // Smoothly align the heading to the top
       headingEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
+  <!-- =======================================================
+  * CAROUSEL MODAL FUNCTIONALITY
+  ======================================================== -->
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('carouselModal');
+    const modalImage = document.getElementById('carouselImage');
+    const modalTitle = document.getElementById('carouselTitle');
+    const closeBtn = document.getElementById('carouselClose');
+    const prevBtn = document.getElementById('carouselPrev');
+    const nextBtn = document.getElementById('carouselNext');
+    const indicatorsContainer = document.getElementById('carouselIndicators');
+    
+    let currentImages = [];
+    let currentIndex = 0;
+    let currentTitle = '';
+
+    // Add click event listeners to all circular photos
+    document.querySelectorAll('.testimonials .client-image .circular-photo').forEach(photo => {
+      photo.addEventListener('click', (e) => {
+        // Prevent the click from triggering the hover effect
+        e.stopPropagation();
+        
+        // Get the container and all images
+        const container = photo.closest('.circular-photo-container');
+        const images = Array.from(container.querySelectorAll('.circular-photo')).map(img => img.src);
+        const testimonialContent = container.closest('.testimonial-content');
+        const title = testimonialContent.querySelector('h4').textContent;
+        
+        // Open carousel with these images
+        openCarousel(images, title);
+      });
+    });
+
+    function openCarousel(images, title) {
+      currentImages = images;
+      currentIndex = 0;
+      currentTitle = title;
+      
+      // Update modal content
+      modalImage.src = images[0];
+      modalTitle.textContent = title;
+      
+      // Create indicators
+      createIndicators(images.length);
+      
+      // Show modal
+      modal.classList.add('show');
+      document.body.style.overflow = 'hidden';
+      
+      // Update navigation buttons
+      updateNavigationButtons();
+    }
+
+    function createIndicators(count) {
+      indicatorsContainer.innerHTML = '';
+      for (let i = 0; i < count; i++) {
+        const indicator = document.createElement('div');
+        indicator.className = 'carousel-indicator';
+        if (i === 0) indicator.classList.add('active');
+        indicator.addEventListener('click', () => goToImage(i));
+        indicatorsContainer.appendChild(indicator);
+      }
+    }
+
+    function updateNavigationButtons() {
+      prevBtn.disabled = currentIndex === 0;
+      nextBtn.disabled = currentIndex === currentImages.length - 1;
+      
+      // Update indicators
+      const indicators = indicatorsContainer.querySelectorAll('.carousel-indicator');
+      indicators.forEach((indicator, index) => {
+        indicator.classList.toggle('active', index === currentIndex);
+      });
+    }
+
+    function goToImage(index) {
+      if (index >= 0 && index < currentImages.length) {
+        currentIndex = index;
+        modalImage.src = currentImages[index];
+        updateNavigationButtons();
+      }
+    }
+
+    function nextImage() {
+      if (currentIndex < currentImages.length - 1) {
+        goToImage(currentIndex + 1);
+      }
+    }
+
+    function prevImage() {
+      if (currentIndex > 0) {
+        goToImage(currentIndex - 1);
+      }
+    }
+
+    function closeCarousel() {
+      modal.classList.remove('show');
+      document.body.style.overflow = '';
+    }
+
+    // Event listeners
+    closeBtn.addEventListener('click', closeCarousel);
+    prevBtn.addEventListener('click', prevImage);
+    nextBtn.addEventListener('click', nextImage);
+    
+    // Close modal when clicking outside
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        closeCarousel();
+      }
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (!modal.classList.contains('show')) return;
+      
+      switch (e.key) {
+        case 'Escape':
+          closeCarousel();
+          break;
+        case 'ArrowLeft':
+          prevImage();
+          break;
+        case 'ArrowRight':
+          nextImage();
+          break;
+      }
     });
   });
 </script>

@@ -1659,20 +1659,24 @@ section,
   transform: translateY(-3px);
 }
 
-.portfolio .portfolio-wrap:hover {
+.portfolio .portfolio-wrap:hover,
+.portfolio .portfolio-item:hover .portfolio-wrap {
   transform: translateY(-5px);
 }
 
-.portfolio .portfolio-wrap:hover img {
+.portfolio .portfolio-wrap:hover img,
+.portfolio .portfolio-item:hover .portfolio-wrap img {
   transform: scale(1.08);
 }
 
-.portfolio .portfolio-wrap:hover .portfolio-info {
+.portfolio .portfolio-wrap:hover .portfolio-info,
+.portfolio .portfolio-item:hover .portfolio-wrap .portfolio-info {
   transform: translateY(0);
   opacity: 1;
 }
 
-.portfolio .portfolio-wrap:hover .portfolio-info .content {
+.portfolio .portfolio-wrap:hover .portfolio-info .content,
+.portfolio .portfolio-item:hover .portfolio-wrap .portfolio-info .content {
   transform: translateY(0);
 }
 
@@ -2666,7 +2670,8 @@ body.has-mouse .cartoon-eyes {
 }
 
 .portfolio-wrap.viewed:hover::before,
-.portfolio-wrap.viewed:focus-within::before {
+.portfolio-wrap.viewed:focus-within::before,
+.portfolio-item:hover .portfolio-wrap.viewed::before {
   opacity: 0;
   transform: translateY(2px);
 }

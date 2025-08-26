@@ -1864,6 +1864,8 @@ document.getElementById("projectModal").addEventListener("hidden.bs.modal", () =
 
   function activateNearest(clientX, clientY){
     let best = null, bestDist = Infinity;
+    const threshold = 40; // Minimum distance threshold
+    
     for (const p of photos) {
       const r = p.getBoundingClientRect();
       const cx = r.left + r.width/2;
@@ -1871,7 +1873,14 @@ document.getElementById("projectModal").addEventListener("hidden.bs.modal", () =
       const d = (cx - clientX)**2 + (cy - clientY)**2;
       if (d < bestDist) { bestDist = d; best = p; }
     }
-    photos.forEach(p => p.classList.toggle('active', p === best));
+    
+    // Only activate if within threshold distance
+    if (bestDist <= threshold * threshold) {
+      photos.forEach(p => p.classList.toggle('active', p === best));
+    } else {
+      // Clear all active states if mouse is too far from any photo
+      photos.forEach(p => p.classList.remove('active'));
+    }
   }
 
   container.addEventListener('mousemove', e => activateNearest(e.clientX, e.clientY));

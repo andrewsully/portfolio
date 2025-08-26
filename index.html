@@ -28,7 +28,7 @@
   <!-- =======================================================
   * PRELOAD CRITICAL RESOURCES
   ======================================================== -->
-  <link rel="preload" href="assets/img/cartoonloader.png" as="image" type="image/png">
+  <!-- Cartoonloader preload handled dynamically via JavaScript based on connection speed -->
   
   <!-- =======================================================
   * FAVICONS
@@ -2236,6 +2236,101 @@ document.getElementById("projectModal").addEventListener("hidden.bs.modal", () =
 })();
 </script>
 
+  <!-- =======================================================
+  * CONDITIONAL PRELOAD LOGIC
+  ======================================================== -->
+  <script>
+  (() => {
+    // Function to conditionally preload the cartoon loader based on connection speed
+    function conditionallyPreloadCartoonLoader() {
+      // Only preload if we're on a genuinely slow connection
+      // and the preloader is likely to be visible for a meaningful time
+      let shouldPreload = false;
+      
+      // Method 1: Check Network Information API (modern browsers)
+      if (navigator.connection) {
+        const connection = navigator.connection;
+        const verySlowConnections = ['slow-2g', '2g']; // Only very slow connections
+        const effectiveType = connection.effectiveType || connection.type;
+        
+        if (verySlowConnections.includes(effectiveType)) {
+          shouldPreload = true;
+        }
+        
+        // Don't preload for 3g or 4g as they're usually fast enough
+        // Don't preload if saveData is enabled (user wants to save bandwidth)
+        if (connection.saveData) {
+          shouldPreload = false;
+        }
+      }
+      
+      // Method 2: Only preload if page load is taking significantly longer
+      // Wait 2 seconds instead of 1 to ensure it's genuinely slow
+      setTimeout(() => {
+        if (document.readyState !== 'complete' && !shouldPreload) {
+          // Only preload if we haven't already decided to preload
+          // and the page is still loading after 2 seconds
+          shouldPreload = true;
+        }
+        
+        if (shouldPreload) {
+          preloadCartoonLoader();
+        }
+      }, 2000);
+    }
+    
+    // Function to actually preload the image
+    function preloadCartoonLoader() {
+      // Check if already preloaded to avoid duplicates
+      if (document.querySelector('link[href="assets/img/cartoonloader.png"]')) {
+        return;
+      }
+      
+      // Check if preloader is still visible (if not, don't preload)
+      const preloader = document.querySelector('#preloader');
+      if (!preloader || preloader.classList.contains('fade-out')) {
+        return;
+      }
+      
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.href = 'assets/img/cartoonloader.png';
+      link.as = 'image';
+      link.type = 'image/png';
+      
+      // Add to head
+      document.head.appendChild(link);
+      
+      // Create an invisible image element to actually "use" the preloaded image
+      // This satisfies the browser's requirement that preloaded resources be used
+      const img = document.createElement('img');
+      img.src = 'assets/img/cartoonloader.png';
+      img.style.position = 'absolute';
+      img.style.opacity = '0';
+      img.style.pointerEvents = 'none';
+      img.style.zIndex = '-1';
+      img.style.width = '1px';
+      img.style.height = '1px';
+      img.style.top = '-9999px';
+      img.style.left = '-9999px';
+      
+      // Add to body temporarily
+      document.body.appendChild(img);
+      
+      // Remove the invisible image after a short delay
+      setTimeout(() => {
+        if (img.parentNode) {
+          img.parentNode.removeChild(img);
+        }
+      }, 100);
+      
+      console.log('Cartoon loader preloaded and used for very slow connection');
+    }
+    
+    // Run the conditional preload logic
+    conditionallyPreloadCartoonLoader();
+  })();
+  </script>
 
 </body>
 

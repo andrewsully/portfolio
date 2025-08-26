@@ -402,6 +402,25 @@ body.preloader-active {
   height: 100%;
 }
 
+/*=============================================
+=            PATCH NOTES HEADER              =
+============================================*/
+
+/* Remove em dashes and style "Andrew Edition" for the Patch Notes header */
+.section-title .patch-notes-title:before,
+.section-title .patch-notes-title:after {
+  display: none !important;
+}
+
+.section-title .patch-notes-title {
+  font-weight: 400 !important;
+  font-size: 32px !important;
+}
+
+.section-title .patch-notes-title .bold-part {
+  font-weight: 700 !important;
+}
+
 #preloader.fade-out {
   opacity: 0;
   visibility: hidden;

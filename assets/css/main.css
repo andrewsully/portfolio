@@ -3050,3 +3050,37 @@ section,
 .ff-section {
   overflow: visible;
 }
+
+/* Highlight background for bold text */
+/* .highlight-text {
+  color: color-mix(in srgb, var(--default-color), transparent 20%);
+  font-style: italic;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--contrast-color) 80%, var(--heading-color) 20%);
+  text-decoration-thickness: 0.35rem;
+  text-underline-offset: 0.2rem;
+  text-decoration-skip-ink: none;
+
+  f2c14b = gold
+  f07c8b = pink
+} */
+
+
+.highlight-text-primary {
+  color: color-mix(in srgb, var(--default-color), transparent 0%);
+  font-style: italic;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, #f2c14b, transparent 40%); 
+  text-decoration-thickness: 0.25rem;
+  text-underline-offset: 0.15rem;
+  text-decoration-skip-ink: none;
+} 
+
+
+.highlight-text-secondary {
+  color: color-mix(in srgb, var(--default-color), transparent 0%);
+  font-style: italic;
+  font-weight: 600;
+} 

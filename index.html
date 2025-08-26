@@ -51,7 +51,7 @@
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
 
   <!-- =======================================================
   * MAIN CSS FILE
@@ -999,7 +999,7 @@
   <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
   <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
   <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
 
   <!-- =======================================================
   * MAIN JAVASCRIPT FILE
@@ -1024,7 +1024,7 @@
   <!-- =======================================================
   * PROJECT MODAL
   ======================================================== -->
-  <div class="modal fade modal-corner" id="projectModal" tabindex="-1" aria-hidden="true" style="--modal-speed:.55s">
+  <div class="modal fade modal-corner" id="projectModal" tabindex="-1" style="--modal-speed:.55s">
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header flex-column align-items-start">
@@ -1131,7 +1131,7 @@
       categories: ["ML & Modeling", "Visualization"],
       course: "Capstone | Spring 2024",
       coverPhoto: "assets/img/poster.png",
-      photos: ["assets/img/IMG_7923.jpeg"],
+      photos: ["assets/img/IMG_7923.jpeg", "assets/img/portfolio/capstoneexample.png"],
       links: null,
       overviewIntro: "Deployed machine learning systems to protect the integrity of the eCREST survey (used in suicide prevention research) by detecting and filtering AI-generated responses.",
       overview: [
@@ -1239,7 +1239,7 @@
       categories: ["MLOps & Systems"],
       course: "Systems Development for CS | Fall 2022",
       coverPhoto: "assets/img/project_photos/exampleautodif.png",
-      photos: ["assets/img/project_photos/exampleautodif.png"],
+      photos: ["assets/img/project_photos/exampleautodif.png", "assets/img/portfolio/howtouse.png"],
       links: [["GitHub Repo", "https://github.com/andrewsully/Automatic-Differentiation-Package"]],
       overviewIntro: "Developed and published a forward-mode automatic differentiation Python package on PyPI, enabling efficient and precise gradient computation for scientific computing and machine learning applications.",
       overview: [
@@ -1377,17 +1377,7 @@
     const items = [];
     const seen = new Set(); // dedupe: 'img:src' / 'yt:id'
 
-    // photos: array of strings
-    const photos = Array.isArray(d.photos) ? d.photos : (d.photos ? [d.photos] : []);
-    photos.forEach(src => {
-      if (typeof src === "string" && src.trim()) {
-        const key = "img:" + src.trim();
-        if (!seen.has(key)) {
-          items.push({ type: "image", src: src.trim(), alt: d.title || "Project image" });
-          seen.add(key);
-        }
-      }
-    });
+    //MOVING PHOTOS LAST SO IT APPEARS AFTER VIDEOS
 
     // videos: array of YouTube URLs or IDs
     const videos = Array.isArray(d.videos) ? d.videos : (d.videos ? [d.videos] : []);
@@ -1433,6 +1423,17 @@
         }
       }
     }
+    // photos: array of strings
+    const photos = Array.isArray(d.photos) ? d.photos : (d.photos ? [d.photos] : []);
+    photos.forEach(src => {
+      if (typeof src === "string" && src.trim()) {
+        const key = "img:" + src.trim();
+        if (!seen.has(key)) {
+          items.push({ type: "image", src: src.trim(), alt: d.title || "Project image" });
+          seen.add(key);
+        }
+      }
+    });
 
     return items;
   }
@@ -1462,12 +1463,12 @@
   }
 
 
-  function swiperMediaMarkup(items, title='') {
-    const slides = items.map(item => {
+  function bootstrapCarouselMarkup(items, title='') {
+    const slides = items.map((item, index) => {
       if (item.type === 'youtube') {
         const src = `https://www.youtube.com/embed/${item.id}?rel=0&modestbranding=1`;
         return `
-          <div class="swiper-slide">
+          <div class="carousel-item ${index === 0 ? 'active' : ''}">
             <div class="ratio ratio-16x9">
               <iframe src="${src}" title="${title || 'YouTube video'}"
                       allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -1477,66 +1478,84 @@
       }
       const alt = item.alt || title || 'Project image';
       return `
-        <div class="swiper-slide">
+        <div class="carousel-item ${index === 0 ? 'active' : ''}">
           <div class="ratio ratio-16x9">
             <img src="${item.src}" alt="${alt}" loading="lazy" />
           </div>
         </div>`;
     }).join('');
 
+    const indicators = items.map((item, index) => `
+      <button type="button" data-bs-target="#projectModalCarousel" data-bs-slide-to="${index}" 
+              class="${index === 0 ? 'active' : ''}" aria-current="${index === 0 ? 'true' : 'false'}" 
+              aria-label="Slide ${index + 1}"></button>
+    `).join('');
+
     return `
-      <div class="swiper project-media-swiper">
-        <div class="swiper-wrapper">${slides}</div>
-        <div class="swiper-pagination"></div>
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
+      <div id="projectModalCarousel" class="carousel slide project-media-carousel" data-bs-ride="false">
+        <div class="carousel-indicators">
+          ${indicators}
+        </div>
+        <div class="carousel-inner">
+          ${slides}
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#projectModalCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#projectModalCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+        <div class="carousel-counter">
+          <span class="current-slide">1</span> / <span class="total-slides">${items.length}</span>
+        </div>
       </div>`;
   }
 
 
-  function initMediaSwiper() {
-    const el = document.querySelector('#projectModal .project-media .project-media-swiper');
-    if (!el) return;
+  function initBootstrapCarousel() {
+    const carouselEl = document.querySelector('#projectModalCarousel');
+    if (!carouselEl) return;
 
-    // Destroy old instance if present
-    if (el.swiper) {
-      el.swiper.destroy(true, true);
-    }
-
-    const numSlides = el.querySelectorAll('.swiper-slide').length;
+    // Get the number of slides
+    const slides = carouselEl.querySelectorAll('.carousel-item');
+    const numSlides = slides.length;
     
-    // Only show navigation and pagination if there are multiple slides
+    
+    // Only show navigation and indicators if there are multiple slides
     const hasMultipleSlides = numSlides > 1;
     
     // Hide/show navigation elements based on slide count
-    const prevBtn = el.querySelector('.swiper-button-prev');
-    const nextBtn = el.querySelector('.swiper-button-next');
-    const pagination = el.querySelector('.swiper-pagination');
+    const prevBtn = carouselEl.querySelector('.carousel-control-prev');
+    const nextBtn = carouselEl.querySelector('.carousel-control-next');
+    const indicators = carouselEl.querySelector('.carousel-indicators');
+    const counter = carouselEl.querySelector('.carousel-counter');
     
     if (prevBtn) prevBtn.style.display = hasMultipleSlides ? '' : 'none';
     if (nextBtn) nextBtn.style.display = hasMultipleSlides ? '' : 'none';
-    if (pagination) pagination.style.display = hasMultipleSlides ? '' : 'none';
+    if (indicators) indicators.style.display = hasMultipleSlides ? '' : 'none';
+    if (counter) counter.style.display = hasMultipleSlides ? '' : 'none';
 
-    new Swiper(el, {
-      loop: hasMultipleSlides, // only loop if more than 1 slide
-      speed: 600,
-      slidesPerView: 1,
-      spaceBetween: 10,
-      pagination: { 
-        el: el.querySelector('.swiper-pagination'), 
-        clickable: true,
-        enabled: hasMultipleSlides // disable pagination for single slides
-      },
-      navigation: {
-        nextEl: el.querySelector('.swiper-button-next'),
-        prevEl: el.querySelector('.swiper-button-prev'),
-        enabled: hasMultipleSlides // disable navigation for single slides
-      },
-      // Additional safety check to prevent loop warnings
-      allowTouchMove: hasMultipleSlides,
-      watchSlidesProgress: hasMultipleSlides,
-      // Explicitly disable loop for single slides to prevent warnings
-      loopedSlides: hasMultipleSlides ? undefined : 0
+    // Only initialize Bootstrap carousel if we have slides
+    if (numSlides === 0) {
+      console.warn('No slides found for Bootstrap carousel initialization');
+      return;
+    }
+
+    // Initialize Bootstrap carousel
+    const carousel = new bootstrap.Carousel(carouselEl, {
+      interval: false, // Disable auto-sliding
+      wrap: hasMultipleSlides // Only enable loop if multiple slides
+    });
+
+    // Add event listener to update counter when slides change
+    carouselEl.addEventListener('slid.bs.carousel', (event) => {
+      const currentSlide = event.to + 1; // Bootstrap uses 0-based indexing
+      const counter = carouselEl.querySelector('.carousel-counter .current-slide');
+      if (counter) {
+        counter.textContent = currentSlide;
+      }
     });
   }
 
@@ -1561,8 +1580,11 @@
         mediaEl.innerHTML = singleMediaMarkup(mediaItems[0], d.title);
       } else {
         mediaEl.classList.remove("d-none");
-        mediaEl.innerHTML = swiperMediaMarkup(mediaItems, d.title);
-        setTimeout(initMediaSwiper, 0);
+        mediaEl.innerHTML = bootstrapCarouselMarkup(mediaItems, d.title);
+        // Use requestAnimationFrame to ensure DOM is fully updated before initializing Bootstrap carousel
+        requestAnimationFrame(() => {
+          setTimeout(initBootstrapCarousel, 50); // Small delay to ensure slides are rendered
+        });
       }
     }
 
@@ -1650,6 +1672,87 @@
 document.getElementById("projectModal").addEventListener("hidden.bs.modal", () => {
   if (location.hash) {
     history.replaceState(null, "", " "); // removes hash without reloading
+  }
+  // Properly manage focus when modal is hidden
+  const modal = document.getElementById("projectModal");
+  if (modal) {
+    // Set inert to prevent focus when hidden
+    modal.setAttribute('inert', '');
+    // Remove any aria-hidden attributes that might have been added
+    modal.removeAttribute('aria-hidden');
+    
+    // Ensure no elements retain focus
+    const focusedElement = document.activeElement;
+    if (focusedElement && modal.contains(focusedElement)) {
+      focusedElement.blur();
+    }
+  }
+});
+
+// Handle modal hiding process to prevent aria-hidden conflicts
+document.getElementById("projectModal").addEventListener("hide.bs.modal", () => {
+  const modal = document.getElementById("projectModal");
+  if (modal) {
+    // Immediately set inert to prevent focus during hide transition
+    modal.setAttribute('inert', '');
+    // Remove aria-hidden to prevent conflicts
+    modal.removeAttribute('aria-hidden');
+    
+    // Also handle any close button focus issues
+    const closeButton = modal.querySelector('.btn-close');
+    if (closeButton) {
+      closeButton.blur();
+    }
+    
+    // Handle modal backdrop if it exists
+    const backdrop = document.querySelector('.modal-backdrop');
+    if (backdrop) {
+      backdrop.removeAttribute('aria-hidden');
+    }
+  }
+});
+
+// Proper focus management when modal is shown
+document.getElementById("projectModal").addEventListener("show.bs.modal", () => {
+  const modal = document.getElementById("projectModal");
+  if (modal) {
+    // Remove inert to allow interaction
+    modal.removeAttribute('inert');
+    // Ensure no aria-hidden conflicts
+    modal.removeAttribute('aria-hidden');
+  }
+});
+
+// Additional focus management for modal shown event
+document.getElementById("projectModal").addEventListener("shown.bs.modal", () => {
+  const modal = document.getElementById("projectModal");
+  if (modal) {
+    // Focus the first focusable element in the modal
+    const firstFocusable = modal.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+    if (firstFocusable) {
+      firstFocusable.focus();
+    }
+  }
+});
+
+// Prevent aria-hidden conflicts by monitoring for Bootstrap's aria-hidden additions
+const observer = new MutationObserver((mutations) => {
+  mutations.forEach((mutation) => {
+    if (mutation.type === 'attributes' && mutation.attributeName === 'aria-hidden') {
+      const modal = document.getElementById("projectModal");
+      if (modal && modal.classList.contains('show') && mutation.target.getAttribute('aria-hidden') === 'true') {
+        // If Bootstrap tries to add aria-hidden to the modal while it's shown, remove it
+        mutation.target.removeAttribute('aria-hidden');
+      }
+    }
+  });
+});
+
+// Start observing the modal for aria-hidden changes
+document.addEventListener('DOMContentLoaded', () => {
+  const modal = document.getElementById("projectModal");
+  if (modal) {
+    observer.observe(modal, { attributes: true, attributeFilter: ['aria-hidden'] });
   }
 });
 
@@ -1791,7 +1894,7 @@ document.getElementById("projectModal").addEventListener("hidden.bs.modal", () =
       <div class="portfolio-wrap position-relative${isElection ? " election-highlight" : ""}">
         <img src="${cover}" class="img-fluid" alt="${proj.title}" loading="lazy">
 
-        <div class="open-indicator" aria-hidden="true">
+        <div class="open-indicator">
           <i class="bi bi-box-arrow-up-right me-1"></i><span>Open</span>
         </div>
 

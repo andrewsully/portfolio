@@ -50,6 +50,9 @@
    */
   const preloader = document.querySelector('#preloader');
   if (preloader) {
+    // Add class to body to disable scrolling immediately
+    document.body.classList.add('preloader-active');
+    
     window.addEventListener('load', () => {
       // Add fade-out class to trigger CSS transition
       preloader.classList.add('fade-out');
@@ -57,6 +60,8 @@
       // Remove the element after transition completes
       setTimeout(() => {
         preloader.remove();
+        // Re-enable scrolling after preloader is removed
+        document.body.classList.remove('preloader-active');
       }, 600); // Match the CSS transition duration (0.6s = 600ms)
     });
   }

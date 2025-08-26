@@ -1780,6 +1780,12 @@ section,
   border-radius: 10px;
 }
 
+/* Remove golden glow when project is viewed */
+.portfolio-wrap.election-highlight.viewed {
+  box-shadow: none;
+  border-radius: 10px;
+}
+
 /* Ensure all text elements in portfolio items don't interfere with clicks */
 .portfolio .portfolio-wrap h4,
 .portfolio .portfolio-wrap h6,
@@ -1807,6 +1813,11 @@ section,
   font-size: 1.1em;
   vertical-align: middle;
   opacity: 0.8;
+}
+
+/* Hide star when project is viewed */
+.portfolio-wrap.viewed .portfolio-title .star {
+  display: none;
 }
 
 /* Portfolio Responsive */

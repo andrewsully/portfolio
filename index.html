@@ -828,6 +828,32 @@
     </section><!-- End Testimonials Section -->
 
     <!-- =======================================================
+    * CAROUSEL MODAL
+    ======================================================== -->
+    <div id="carouselModal" class="carousel-modal">
+      <div class="carousel-container">
+        <button class="carousel-close" id="carouselClose">
+          <i class="bi bi-x"></i>
+        </button>
+        <div class="carousel-image-container">
+          <img id="carouselImage" class="carousel-image" src="" alt="Carousel Image">
+          <div class="carousel-navigation">
+            <button class="carousel-nav-btn" id="carouselPrev">
+              <i class="bi bi-chevron-left"></i>
+            </button>
+            <button class="carousel-nav-btn" id="carouselNext">
+              <i class="bi bi-chevron-right"></i>
+            </button>
+          </div>
+          <div class="carousel-header">
+            <h3 class="carousel-title" id="carouselTitle"></h3>
+          </div>
+          <div class="carousel-indicators" id="carouselIndicators"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =======================================================
     * CONTACT SECTION
     ======================================================== -->
     <section id="contact" class="contact section">
@@ -1838,6 +1864,8 @@ document.getElementById("projectModal").addEventListener("hidden.bs.modal", () =
 
   function activateNearest(clientX, clientY){
     let best = null, bestDist = Infinity;
+    const threshold = 40; // Minimum distance threshold
+    
     for (const p of photos) {
       const r = p.getBoundingClientRect();
       const cx = r.left + r.width/2;
@@ -1845,7 +1873,14 @@ document.getElementById("projectModal").addEventListener("hidden.bs.modal", () =
       const d = (cx - clientX)**2 + (cy - clientY)**2;
       if (d < bestDist) { bestDist = d; best = p; }
     }
-    photos.forEach(p => p.classList.toggle('active', p === best));
+    
+    // Only activate if within threshold distance
+    if (bestDist <= threshold * threshold) {
+      photos.forEach(p => p.classList.toggle('active', p === best));
+    } else {
+      // Clear all active states if mouse is too far from any photo
+      photos.forEach(p => p.classList.remove('active'));
+    }
   }
 
   container.addEventListener('mousemove', e => activateNearest(e.clientX, e.clientY));
@@ -1906,6 +1941,148 @@ document.getElementById("projectModal").addEventListener("hidden.bs.modal", () =
     collapseEl.addEventListener('shown.bs.collapse', () => {
       // Smoothly align the heading to the top
       headingEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+
+  <!-- =======================================================
+  * CAROUSEL MODAL FUNCTIONALITY
+  ======================================================== -->
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('carouselModal');
+    const modalImage = document.getElementById('carouselImage');
+    const modalTitle = document.getElementById('carouselTitle');
+    const closeBtn = document.getElementById('carouselClose');
+    const prevBtn = document.getElementById('carouselPrev');
+    const nextBtn = document.getElementById('carouselNext');
+    const indicatorsContainer = document.getElementById('carouselIndicators');
+    
+    let currentImages = [];
+    let currentIndex = 0;
+    let currentTitle = '';
+
+    // Add click event listeners to all circular photos
+    document.querySelectorAll('.testimonials .client-image .circular-photo').forEach(photo => {
+      photo.addEventListener('click', (e) => {
+        // Prevent the click from triggering the hover effect
+        e.stopPropagation();
+        
+        // Get the container and all images
+        const container = photo.closest('.circular-photo-container');
+        const images = Array.from(container.querySelectorAll('.circular-photo')).map(img => img.src);
+        const testimonialContent = container.closest('.testimonial-content');
+        const title = testimonialContent.querySelector('h4').textContent;
+        
+        // Find the index of the clicked image
+        const clickedImageSrc = photo.src;
+        const clickedIndex = images.indexOf(clickedImageSrc);
+        
+        // Open carousel with these images, starting with the clicked image
+        openCarousel(images, title, clickedIndex);
+      });
+    });
+
+    function openCarousel(images, title, startIndex = 0) {
+      currentImages = images;
+      currentIndex = startIndex;
+      currentTitle = title;
+      
+      // Update modal content
+      modalImage.src = images[startIndex];
+      modalTitle.textContent = title;
+      
+      // Create indicators
+      createIndicators(images.length);
+      
+      // Show modal with animation
+      modal.classList.add('show');
+      document.body.style.overflow = 'hidden';
+      
+      // Update navigation buttons
+      updateNavigationButtons();
+    }
+
+    function createIndicators(count) {
+      indicatorsContainer.innerHTML = '';
+      for (let i = 0; i < count; i++) {
+        const indicator = document.createElement('div');
+        indicator.className = 'carousel-indicator';
+        if (i === 0) indicator.classList.add('active');
+        indicator.addEventListener('click', () => goToImage(i));
+        indicatorsContainer.appendChild(indicator);
+      }
+    }
+
+    function updateNavigationButtons() {
+      // Remove disabled states - buttons always work
+      prevBtn.disabled = false;
+      nextBtn.disabled = false;
+      
+      // Update indicators
+      const indicators = indicatorsContainer.querySelectorAll('.carousel-indicator');
+      indicators.forEach((indicator, index) => {
+        indicator.classList.toggle('active', index === currentIndex);
+      });
+    }
+
+    function goToImage(index) {
+      if (index >= 0 && index < currentImages.length) {
+        currentIndex = index;
+        modalImage.src = currentImages[index];
+        updateNavigationButtons();
+      }
+    }
+
+    function nextImage() {
+      // Circular navigation - go to first image if at the end
+      const nextIndex = currentIndex === currentImages.length - 1 ? 0 : currentIndex + 1;
+      goToImage(nextIndex);
+    }
+
+    function prevImage() {
+      // Circular navigation - go to last image if at the beginning
+      const prevIndex = currentIndex === 0 ? currentImages.length - 1 : currentIndex - 1;
+      goToImage(prevIndex);
+    }
+
+    function closeCarousel() {
+      // Start exit animation
+      modal.classList.remove('show');
+      
+      // Wait for animation to complete before hiding
+      setTimeout(() => {
+        document.body.style.overflow = '';
+      }, 400); // Match the transition duration
+    }
+
+    // Event listeners
+    closeBtn.addEventListener('click', closeCarousel);
+    prevBtn.addEventListener('click', prevImage);
+    nextBtn.addEventListener('click', nextImage);
+    
+    // Close modal when clicking outside
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        closeCarousel();
+      }
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (!modal.classList.contains('show')) return;
+      
+      switch (e.key) {
+        case 'Escape':
+          closeCarousel();
+          break;
+        case 'ArrowLeft':
+          prevImage();
+          break;
+        case 'ArrowRight':
+          nextImage();
+          break;
+      }
     });
   });
 </script>

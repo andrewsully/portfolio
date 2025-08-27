@@ -1890,6 +1890,38 @@ document.addEventListener('DOMContentLoaded', () => {
 })();
 </script>
 
+  <!-- =======================================================
+  * DOMAINS BRIDGED CARTOON
+  ======================================================== -->
+  <script>
+(() => {
+  const target = document.getElementById('domains-bridged');
+  if (!target) return;
+
+  // Create the bubble element
+  const bubble = document.createElement('div');
+  bubble.className = 'once-bubble';
+  bubble.setAttribute('role', 'img');
+  bubble.setAttribute('aria-label', '8 domains bridged with data science');
+
+  const img = new Image();
+  img.src = 'assets/img/8cartoon.png';
+  img.alt = 'Andrew with speech bubble: "8 domains bridged with data science"';
+  bubble.appendChild(img);
+
+  target.appendChild(bubble);
+
+  // Add hover functionality
+  target.addEventListener('mouseenter', () => {
+    bubble.style.opacity = '1';
+  });
+
+  target.addEventListener('mouseleave', () => {
+    bubble.style.opacity = '0';
+  });
+})();
+</script>
+
 
 
 

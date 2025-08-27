@@ -1410,7 +1410,7 @@ section,
 }
 
 .stats-item:hover .stats-tooltip {
-  opacity: 1;
+  opacity: 0;
   visibility: visible;
 }
 
@@ -3016,6 +3016,47 @@ body.has-mouse .cartoon-eyes {
 @media (max-width: 576px) {
   #library-hours .once-bubble {
     right: -20px;
+    width: 150px;
+  }
+}
+
+/* Domains bridged bubble */
+#domains-bridged {
+  position: relative;
+}
+
+#domains-bridged .once-bubble {
+  position: absolute;
+  left: -50%;
+  top: 20%;
+  transform: translateY(-50%) scale(0.98);
+  width: 80%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 9999;
+  background: transparent;
+  padding: 0;
+  border: 0;
+  box-shadow: none;
+  line-height: 0;
+}
+
+#domains-bridged .once-bubble img {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 8px 18px rgba(0,0,0,0.35));
+}
+
+/* Hover effect to show cartoon - simple fade */
+#domains-bridged:hover .once-bubble {
+  opacity: 1;
+}
+
+/* Mobile tweak for domains-bridged */
+@media (max-width: 576px) {
+  #domains-bridged .once-bubble {
+    left: -20px;
     width: 150px;
   }
 }

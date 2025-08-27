@@ -1361,6 +1361,85 @@ section,
   margin-bottom: 0.15rem !important;
 }
 
+/* Reusable tooltip styling for stats items */
+.stats-item {
+  position: relative;
+}
+
+.stats-tooltip {
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  transform: translateY(-50%);
+  background: #2c2c2c;
+  border: 5px solid #626262;
+  border-radius: 20px;
+  padding: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  min-width: 350px;
+  max-width: 1050px;
+  margin-right: -20px;
+}
+
+.stats-tooltip::before { /* Outer stroke */
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  transform: translateY(-50%);
+  border: 14px solid transparent; /* Increased size for stroke */
+  border-left-color: #626262; /* Stroke color */
+  margin-left: 5px; /* Gap between tooltip and arrow */
+  z-index: 999; /* Behind the inner triangle */
+}
+
+.stats-tooltip::after { /* Inner triangle */
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  transform: translateY(-50%);
+  border: 12px solid transparent; /* Inner triangle size */
+  border-left-color: #626262; /* Tooltip background color */
+  margin-left: 5px; /* Gap between tooltip and arrow */
+  z-index: 1000; /* On top of the stroke */
+}
+
+.stats-item:hover .stats-tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Hide tooltips on mobile devices */
+@media (max-width: 768px) {
+  .stats-tooltip {
+    display: none !important;
+  }
+}
+
+
+.stats-tooltip li {
+  margin-bottom: 8px;
+}
+
+.stats-tooltip li:last-child {
+  margin-bottom: 0;
+}
+
+.stats-tooltip p {
+  margin: 0;
+  margin-bottom: 0.5rem !important;
+  font-size: 0.8rem !important;
+  line-height: 1.2;
+  color: var(--heading-color);
+  text-align: left;
+  font-weight: 300 !important;
+}
+
 
 .resume .resume-side {
   background-color: var(--surface-color);

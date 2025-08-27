@@ -3061,6 +3061,18 @@ body.has-mouse .cartoon-eyes {
   }
 }
 
+/* Info icon for stats items with tooltips */
+.stats-item .info-icon {
+  position: absolute;
+  top: 10px;
+  left: 15px;
+  font-size: 16px;
+  color: var(--accent-color);
+  opacity: 0.15;
+  z-index: 10;
+  pointer-events: none;
+}
+
 /*=============================================
 =            TESTIMONIALS INTERACTIONS       =
 =============================================*/

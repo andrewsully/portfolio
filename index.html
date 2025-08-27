@@ -57,6 +57,20 @@
   * MAIN CSS FILE
   ======================================================== -->
   <link href="assets/css/main.css" rel="stylesheet">
+  
+  <!-- =======================================================
+  * INLINE STYLES FOR CONCENTRATION LINE
+  ======================================================== -->
+  <style>
+    .resume-item .concentration-line {
+      font-size: 1rem !important;
+      color: color-mix(in srgb, var(--heading-color), transparent 0%) !important;
+      /* font-weight: normal !important; */
+      margin: 0 !important;
+      line-height: 1 !important;
+      margin-bottom: 0.5rem !important;
+    }
+  </style>
 </head>
 
 <body class="index-page">
@@ -112,8 +126,8 @@
                 <h1>Hi, I'm <span class="accent-text">Andrew</span>!</h1>
                 <p class="lead">I'm a <span class="typed" data-typed-items="Data Scientist, Product Analyst, Visualization Designer, Strategy Thinker"></span></p>
                 <p class="description">
-                  To me, a dataset is more than numbers — it's <em>a chorus of untold stories.</em> 
-                  My passion lies in giving those stories a voice and transforming them into strategies that <strong>inspire real-world change.</strong>
+                  To me, a dataset is more than numbers: it's <span class="highlight-text-secondary">a chorus of untold stories.</span> 
+                  My passion lies in giving those stories a voice and transforming them into strategies that inspire real-world change.
                 </p>
 
                 <div class="hero-actions">
@@ -198,8 +212,10 @@
               </div>
 
               <div class="description">
-                <p>Every project begins with <span class="highlight-text-primary">unfamiliar questions.</span> I've tackled them in startup research labs, in fields of crops, in Harvard classrooms, and in fast-moving SaaS companies, shaping data into insights that drive action. Whether detecting battery failures or guiding business strategy, I adapt quickly and turn raw information into meaningful impact.</p>
-                <p><span class="highlight-text-secondary">Now the unfamiliar question lands with you:</span> who to hire? Let me do what I do best—turn ambiguity into clarity and data into impact—and together we'll write the next story.</p>
+                <p>Every project begins with <span class="highlight-text-secondary">unfamiliar questions.</span> I’ve tackled them in startup research labs, crop fields, Harvard classrooms, and fast-moving SaaS teams, building models, running experiments, and shaping results into practical tools. Whether in science or strategy, I adapt quickly and design approaches that create value beyond the data itself.</p>
+                
+                <p><span class="highlight-text-secondary">When the next unfamiliar question arrives,</span> bring on a teammate who translates noise into direction. I turn ambiguity into clarity and data into decisions. <span class="highlight-text-primary">Together, we'll write the next story.</span></p>
+
               </div>
 
             
@@ -539,7 +555,7 @@
               <h3><i class="bi bi-briefcase me-2"></i>Professional Experience</h3>
 
               <div class="resume-item">
-                <h4>Data Scientist – End-to-End Model Development & Signal Processing at Scale</h4>
+                <h4>Data Scientist – <span class='notbold'>End-to-End Model Development & Signal Processing at Scale</span></h4>
                 <h5>Oct 2024 – Aug 2025</h5>
                 <p class="company"><i class="bi bi-building"></i> Titan Advanced Energy Solutions</p>
                 <ul>
@@ -551,7 +567,7 @@
               </div>
 
               <div class="resume-item">
-                <h4>Data Science Intern – Scalable Visualization & ETL Development</h4>
+                <h4>Data Science Intern – <span class='notbold'>Scalable Visualization & ETL Development</span></h4>
                 <h5>May 2023 – Aug 2023</h5>
                 <p class="company"><i class="bi bi-building"></i> Invaio Sciences</p>
                 <ul>
@@ -562,7 +578,7 @@
               </div>
 
               <div class="resume-item">
-                <h4>Data Analytics Intern – Predictive Modeling & Strategic Insights</h4>
+                <h4>Data Analytics Intern – <span class='notbold'>Predictive Modeling & Strategic Insights</span></h4>
                 <h5>Apr 2021 – Jul 2021</h5>
                 <p class="company"><i class="bi bi-building"></i> Hi Marley</p>
                 <ul>
@@ -581,7 +597,7 @@
               </div>
 
               <div class="resume-item">
-                <h4>Undergraduate Teaching Assistant – Database Management Systems</h4>
+                <h4>Undergraduate Teaching Assistant – <span class='notbold'>Database Management Systems</span></h4>
                 <h5>Jan 2021 – Apr 2021</h5>
                 <p class="company"><i class="bi bi-building"></i> Syracuse University</p>
                 <ul>
@@ -597,17 +613,18 @@
               <h3><i class="bi bi-mortarboard me-2"></i>Education</h3>
 
               <div class="resume-item">
-                <h4>Master of Science in Data Science</h4>
+                <h4>MS in Data Science</h4>
                 <h5>May 2024</h5>
                 <p class="company"><i class="bi bi-building"></i> Harvard University | John A. Paulson School of Engineering and Applied Sciences</p>
                 <p>Relevant Coursework: Machine Learning, Deep Learning, Systems Development for CS, MLOps, Data Visualization.</p>
               </div>
 
               <div class="resume-item">
-                <h4>Bachelor of Science in Information Management & Technology</h4>
+                <h4>BS in Information Management & Technology </h4>
+                <div class="concentration-line">Concentration(s): <b>Data Analytics & Project Management </b></div>
                 <h5>May 2022</h5>
                 <p class="company"><i class="bi bi-building"></i> Syracuse University | School of Information Studies</p>
-                <p>Concentrations: Data Analytics & Project Management. Summa Cum Laude, GPA: 3.94/4.00. Awards & Activities: SU Scholars Nominee, Mentor (InclusiveU), Philanthropy Chair (Psi Upsilon), Boston Marathon Runner.</p>
+                <p>Awards & Activities: Summa Cum Laude, GPA: 3.94/4.00. Awards & Activities: SU Scholars Nominee, Mentor (InclusiveU), Philanthropy Chair (Psi Upsilon), Boston Marathon Runner.</p>
               </div>
             </div>
 

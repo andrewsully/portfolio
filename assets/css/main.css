@@ -1337,6 +1337,31 @@ section,
 =            RESUME SECTION                  =
 =============================================*/
 
+.notbold{
+  font-weight:normal;
+}​
+
+.notbold2{
+  font-weight:normal;
+  font-size: 14px !important;
+}​
+
+/* Specific styling for the concentration line in resume */
+.resume-item .concentration-line{
+  font-size: 1.25rem !important; /* Same as h5 */
+  color: color-mix(in srgb, var(--default-color), transparent 20%) !important; /* Same as h3 */
+  font-weight: normal !important;
+  margin: 0 !important;
+  line-height: 1.2 !important;
+  margin-bottom: 0.5rem !important;
+}
+
+/* Remove bottom margin from h4 when followed by concentration line */
+.resume-item h4:has(+ .concentration-line) {
+  margin-bottom: 0.15rem !important;
+}
+
+
 .resume .resume-side {
   background-color: var(--surface-color);
   padding: 2rem;

@@ -27,6 +27,24 @@
   --contrast-color: #310606;
 }
 
+/* Patch Notes Label Colors - For easy color management */
+:root {
+  /* 🟢 Green - Core features, additions, shipped features */
+  --patch-feature: color-mix(in srgb, #28a745, transparent 20%);
+  
+  /* 🟠 Orange - Behaviors, results, outcomes, unexpected events */
+  --patch-behavior: color-mix(in srgb,#f66a0a, transparent 20%);
+  
+  /* 🔴 Red - Bug fixes, corrections, resolved issues */
+  --patch-bugfix: color-mix(in srgb,#db3c4c, transparent 20%);
+  
+  /* 🟡 Yellow - Warnings, known issues, notes, deprecated status */
+  --patch-warning: color-mix(in srgb,#ffcd2a, transparent 20%);
+  
+  /* 🟣 Purple - Dependencies, performance tests, technical requirements */
+  --patch-dependency: color-mix(in srgb,#bb48d3, transparent 20%);
+}
+
 /* Navigation Color Variables */
 :root {
   --nav-color: rgba(236, 236, 236, 0.59);
@@ -2001,27 +2019,34 @@ section,
 
 .testimonials .testimonial-content p {
   font-size: 1rem;
-  line-height: 1.7;
-  margin: 1.5rem 0;
+  line-height: 1.2;
+  margin: 0.575rem 0 0.575rem 0;
   position: relative;
+  font-family: var(--default-font);
+}
+
+.testimonials .testimonial-content h4 {
+  margin-bottom: 0.75rem;
+}
+
+
+.testimonials .testimonial-content h4 {
+  font-family: var(--default-font);
 }
 
 .testimonials .quote-pattern {
   position: absolute;
   top: -1.25rem;
   left: 2rem;
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 3.5rem;
+  height: 3.5rem;
   background-color: var(--surface-color);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   border: 1px solid color-mix(in srgb, var(--default-color), transparent 92%);
-}
-
-.testimonials .quote-pattern i {
-  font-size: 1.25rem;
+  font-size: 2rem;
   color: var(--accent-color);
 }
 

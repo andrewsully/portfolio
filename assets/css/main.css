@@ -2203,11 +2203,19 @@ section,
   flex-direction: column;
   align-items: center;
   gap: 0.75rem;
+  position: relative;
 }
 
 .footer-emoji {
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
+  position: absolute;
+  left: 10%;
+  top: 50%;
+  transform: translateY(-50%) translateX(-50%);
+  font-size: 1.5rem;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .footer-item {
@@ -2225,9 +2233,9 @@ section,
 /* Footer card matches other cards but reads like an appendix */
 .footer-card {
   grid-column: 1 / -1;
-  border: 1px solid rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.0);
   border-radius: 18px;                 /* match your card radius */
-  background: rgba(255,255,255,0.03);
+  background: rgba(#1f1f1f,0.0);
   box-shadow: 0 1px 0 rgba(255,255,255,0.06) inset;
   padding: 20px 22px;
 }
@@ -2270,26 +2278,15 @@ section,
   gap: 12px 18px;
   position: relative;
 }
-.footer-columns::before {
-  /* faint column dividers that align with your style */
-  content: "";
-  position: absolute; inset: 0;
-  background:
-    linear-gradient(90deg, transparent 0, transparent calc(33.333% - 9px),
-      rgba(255,255,255,0.08) calc(33.333% - 9px),
-      rgba(255,255,255,0.08) calc(33.333% - 8px), transparent calc(33.333% - 8px),
-      transparent calc(66.666% - 9px), rgba(255,255,255,0.08) calc(66.666% - 9px),
-      rgba(255,255,255,0.08) calc(66.666% - 8px), transparent calc(66.666% - 8px));
-  pointer-events: none;
-}
+
 
 /* Emoji tokens to match circular photos */
 .footer-emoji {
-  width: 72px; height: 72px;
+  width: 60px; height: 60px;
   display: grid; place-items: center;
   border-radius: 50%;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.12);
+  background: var(--default-color);
+  border: 2px solid color-mix(in srgb, #1f1f1f, transparent 50%);
   margin: 0 auto 8px;
   font-size: 36px;
 }
@@ -2297,12 +2294,16 @@ section,
 /* Code chips for the lines */
 .footer-chip {
   font-family: monospace;
-  text-align: center;
+  text-align: left;
   padding: 8px 10px;
+  padding-left: 40px;
   border-radius: 10px;
   border: 1px solid rgba(255,255,255,0.12);
-  background: rgba(255,255,255,0.04);
+  background: #1f1f1f;
   box-shadow: 0 1px 0 rgba(0,0,0,0.2) inset;
+  width: 80%;
+  margin: 0 auto;
+  position: relative;
 }
 
 /* Responsive: stack columns on small screens */

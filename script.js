@@ -68,3 +68,34 @@ function sendMail(event) {
       }, 5000);
     });
 }
+
+// Debug button text and icon toggle functionality
+document.addEventListener('DOMContentLoaded', function() {
+  const debugButton = document.querySelector('.btn-debug');
+  const collapsibleSection = document.getElementById('collapsable-aboutme');
+  
+  if (debugButton && collapsibleSection) {
+    // Listen for Bootstrap collapse events
+    collapsibleSection.addEventListener('shown.bs.collapse', function() {
+      const icon = debugButton.querySelector('i');
+      const text = debugButton.childNodes[debugButton.childNodes.length - 1];
+      
+      // Change icon to up arrow
+      icon.className = 'bi bi-arrow-up-circle-fill me-2';
+      
+      // Change text to "Hide Bugs 🙈"
+      text.textContent = ' Hide Bugs';
+    });
+    
+    collapsibleSection.addEventListener('hidden.bs.collapse', function() {
+      const icon = debugButton.querySelector('i');
+      const text = debugButton.childNodes[debugButton.childNodes.length - 1];
+      
+      // Change icon back to down arrow
+      icon.className = 'bi bi-arrow-down-circle-fill me-2';
+      
+      // Change text back to "Debug Me"
+      text.textContent = ' Debug Me';
+    });
+  }
+});

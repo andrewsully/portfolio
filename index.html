@@ -184,7 +184,7 @@
 
               <div class="profile-content">
                 <h3>Andrew Sullivan</h3>
-                <p class="profession">MS Data Science</p>
+                <p class="profession">Boston, MA<br><span class="profession-sub">(Willing to Relocate)</span></p>
                 <div class="contact-links">
                   <a href="mailto:sullivan.j.andrew@gmail.com" class="contact-item">
                     <i class="bi bi-envelope"></i>
@@ -194,10 +194,10 @@
                     <i class="bi bi-telephone"></i>
                     +1 (781) 296-6009
                   </a>
-                  <a href="#" class="contact-item">
-                    <i class="bi bi-geo-alt"></i>
-                    Boston, MA - Willing to Relocate
-                  </a>
+                  <div class="contact-item learn-more-label">
+                    <!-- <i class="bi bi-info-circle"></i> -->
+                    Learn more about <a href="#portfolio" class="clickable-word"><i class="bi bi-code-slash me-1"></i>my work</a>/<a href="#testimonials" class="clickable-word"><i class="bi bi-person-badge me-1"></i>myself</a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -252,10 +252,10 @@
                   <i class="bi bi-chat-dots"></i>
                   Let's Talk
                 </a>
-                <a href="#testimonials" class="btn btn-outline" onclick="scrollToTestimonials(event)">
+                <!-- <a href="#testimonials" class="btn btn-outline" onclick="scrollToTestimonials(event)">
                   <i class="bi bi-person-vcard"></i>
                   Fun Facts
-                </a>
+                </a> -->
               </div>
 
             </div>
@@ -716,8 +716,7 @@
                     data-bs-toggle="collapse"
                     data-bs-target="#collapsable-aboutme"
                     aria-expanded="false"
-                    aria-controls="collapsable-aboutme"
-                    onclick="this.style.opacity='0'; this.style.transform='translateY(550px)'; setTimeout(() => this.style.display='none', 2500);">
+                    aria-controls="collapsable-aboutme">
               <i class="bi bi-arrow-down-circle-fill me-2"></i>
               Debug Me
             </button>
@@ -740,7 +739,7 @@
         <!-- Section Title -->
         <div class="container section-title" id="funfacts-top" data-aos="fade-up">
           <h2 class="patch-notes-title"><span style="font-family: monospace;">Patch Notes:</span> <span class="bold-part">Andrew Edition</span></h2>
-          <p>Minor updates, odd features, and a few fun bugs that keep life interesting beyond the screen.</p>
+          <p>Minor <span style="color: var(--patch-result); font-family: monospace;">updates</span>, odd <span style="color: var(--patch-feature); font-family: monospace;">features</span>, and a few fun <span style="color: var(--patch-bugfix); font-family: monospace;">bugs</span> that keep life interesting beyond the screen.</p>
         </div>
 
         <div class="container">
@@ -870,15 +869,15 @@
                   </div>
               
                   <div class="footer-columns">
-                    <div class="footer-column">
+                    <div class="footer-column"">
                       <div class="footer-emoji">🐛</div>
                       <div class="ps-5 footer-chip">Sleep module still in beta 🌙</div>
                     </div>
-                    <div class="footer-column">
+                    <div class="footer-column"">
                       <div class="footer-emoji">⚠️</div>
                       <div class="ps-5 footer-chip">Sunday productivity throttled by NFL daemon 🏈</div>
                     </div>
-                    <div class="footer-column">
+                    <div class="footer-column"">
                       <div class="footer-emoji">🔧</div>
                       <div class="ps-5 footer-chip align">Idle state not implemented 🔄</div>
                     </div>

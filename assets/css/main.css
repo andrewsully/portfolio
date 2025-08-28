@@ -29,20 +29,28 @@
 
 /* Patch Notes Label Colors - For easy color management */
 :root {
-  /* 🟢 Green - Core features, additions, shipped features */
-  --patch-feature: color-mix(in srgb, #28a745, transparent 20%);
+  --patch-mix-ratio: 30%; /* Adjust this value to change all patch note color mixing */
   
-  /* 🟠 Orange - Behaviors, results, outcomes, unexpected events */
-  --patch-behavior: color-mix(in srgb,#f66a0a, transparent 20%);
+  /* 🟢 Green (positive / creation) */
+  --patch-feature: color-mix(in srgb, #28a745, var(--heading-color) var(--patch-mix-ratio));      /* Feature Added */
+  --patch-ship: color-mix(in srgb, #28a745, var(--heading-color) var(--patch-mix-ratio));         /* Feature Shipped */
+  --patch-easter: color-mix(in srgb, #28a745, var(--heading-color) var(--patch-mix-ratio));       /* Easter Egg */
   
-  /* 🔴 Red - Bug fixes, corrections, resolved issues */
-  --patch-bugfix: color-mix(in srgb,#db3c4c, transparent 20%);
+  /* 🔵 Blue (neutral outcome / release) */
+  --patch-result: color-mix(in srgb, #0969da, var(--heading-color) var(--patch-mix-ratio));       /* Result */
+  --patch-dependency: color-mix(in srgb, #0969da, var(--heading-color) var(--patch-mix-ratio));   /* Dependency Introduced */
   
-  /* 🟡 Yellow - Warnings, known issues, notes, deprecated status */
-  --patch-warning: color-mix(in srgb,#ffcd2a, transparent 20%);
+  /* 🟣 Purple (process / experiment) */
+  --patch-performance: color-mix(in srgb, #8250df, var(--heading-color) var(--patch-mix-ratio));  /* Performance Test */
+  --patch-refactor: color-mix(in srgb, #8250df, var(--heading-color) var(--patch-mix-ratio));     /* Refactor Attempt */
   
-  /* 🟣 Purple - Dependencies, performance tests, technical requirements */
-  --patch-dependency: color-mix(in srgb,#bb48d3, transparent 20%);
+  /* 🟠 Orange (fixes / side-effects) */
+  --patch-bugfix: color-mix(in srgb, #f66a0a, var(--heading-color) var(--patch-mix-ratio));       /* Bug Fix */
+  --patch-side: color-mix(in srgb, #f66a0a, var(--heading-color) var(--patch-mix-ratio));         /* Side Effect */
+  
+  /* 🔴 Red (problems / warnings) */
+  --patch-issue: color-mix(in srgb, #cf222e, var(--heading-color) var(--patch-mix-ratio));        /* Issue #24 */
+  --patch-known: color-mix(in srgb, #cf222e, var(--heading-color) var(--patch-mix-ratio));        /* Known Issue */
 }
 
 /* Navigation Color Variables */
@@ -2007,7 +2015,8 @@ section,
 .testimonials .testimonial-content {
   background-color: var(--surface-color);
   border-radius: 20px;
-  padding: 2rem;
+  padding: 1.8rem;
+  padding-bottom: 1.2rem;
   position: relative;
   transition: all 0.3s ease;
   border: 1px solid color-mix(in srgb, var(--default-color), transparent 92%);
@@ -2023,6 +2032,7 @@ section,
   margin: 0.575rem 0 0.575rem 0;
   position: relative;
   font-family: var(--default-font);
+  color: color-mix(in srgb, var(--default-color), transparent 10%);
 }
 
 .testimonials .testimonial-content h4 {
@@ -2036,7 +2046,7 @@ section,
 
 .testimonials .quote-pattern {
   position: absolute;
-  top: -1.25rem;
+  top: -1.95rem;
   left: 2rem;
   width: 3.5rem;
   height: 3.5rem;
@@ -2054,8 +2064,8 @@ section,
   display: flex;
   align-items: center;
   gap: 1rem;
-  margin-top: 1.5rem;
-  padding-top: 1.5rem;
+  margin-top: .75rem;
+  padding-top: .75rem;
   border-top: 1px solid color-mix(in srgb, var(--default-color), transparent 92%);
 }
 
@@ -2088,10 +2098,11 @@ section,
   margin-bottom: 0.25rem;
 }
 
-.testimonials .client-details .position {
+/* .testimonials .client-details .position {
   font-size: 0.875rem;
-  color: color-mix(in srgb, var(--heading-color), transparent 40%);
-}
+  color: color-mix(in srgb, var(--heading-color), transparent 20%);
+} */
+
 
 /* Testimonials Responsive */
 @media (max-width: 1199.98px) {
@@ -2105,6 +2116,11 @@ section,
   }
   .testimonials .testimonial-item:nth-child(even) {
     margin-top: 2rem;
+  }
+  
+  .footer-columns {
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
 }
 
@@ -2131,10 +2147,10 @@ section,
   .testimonials .quote-pattern i {
     font-size: 1.125rem;
   }
-  .testimonials .client-info {
+  /* .testimonials .client-info {
     margin-top: 1.25rem;
     padding-top: 1.25rem;
-  }
+  } */
   .testimonials .client-image {
     width: 45px;
     height: 45px;
@@ -2146,6 +2162,155 @@ section,
     font-size: 0.8125rem;
   }
 }
+
+
+
+
+/* Footer card styling */
+.testimonial-item.footer-card {
+  grid-column: 1 / -1; /* Span full width across all columns */
+  margin-top: 2rem;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.footer-header {
+  grid-column: 1 / -1;
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.footer-title {
+  margin: 0;
+  font-family: var(--default-font);
+}
+
+.footer-columns {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  width: 100%;
+  grid-column: 1 / -1; /* Span full width */
+}
+
+.footer-column {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.footer-emoji {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.footer-item {
+  font-family: monospace;
+  font-size: 0.9rem;
+  line-height: 1.3;
+  color: var(--default-color);
+}
+
+.testimonials .testimonial-content .footer-content {
+  padding: 1rem !important;
+}
+
+
+/* Footer card matches other cards but reads like an appendix */
+.footer-card {
+  grid-column: 1 / -1;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 18px;                 /* match your card radius */
+  background: rgba(255,255,255,0.03);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.06) inset;
+  padding: 20px 22px;
+}
+
+/* Grid layout */
+.footer-content { display: grid; gap: 16px; }
+.footer-header   { text-align: center; }
+
+/* Title underline like your card dividers */
+.footer-title {
+  font-family: monospace;
+  margin: 0 0 6px;
+  position: relative;
+}
+.footer-title::after {
+  content: "";
+  display: block;
+  height: 1px;
+  width: 100%;
+  margin: 10px auto 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.16), transparent);
+}
+
+/* Tiny pill “3 open” */
+.footer-badge {
+  font-size: .75rem;
+  padding: 2px 8px;
+  margin-left: 8px;
+  margin-bottom: 8px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  font-weight: 500;
+}
+
+/* Three equal columns w/ subtle vertical separators */
+.footer-columns {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px 18px;
+  position: relative;
+}
+.footer-columns::before {
+  /* faint column dividers that align with your style */
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(90deg, transparent 0, transparent calc(33.333% - 9px),
+      rgba(255,255,255,0.08) calc(33.333% - 9px),
+      rgba(255,255,255,0.08) calc(33.333% - 8px), transparent calc(33.333% - 8px),
+      transparent calc(66.666% - 9px), rgba(255,255,255,0.08) calc(66.666% - 9px),
+      rgba(255,255,255,0.08) calc(66.666% - 8px), transparent calc(66.666% - 8px));
+  pointer-events: none;
+}
+
+/* Emoji tokens to match circular photos */
+.footer-emoji {
+  width: 72px; height: 72px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  margin: 0 auto 8px;
+  font-size: 36px;
+}
+
+/* Code chips for the lines */
+.footer-chip {
+  font-family: monospace;
+  text-align: center;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.04);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.2) inset;
+}
+
+/* Responsive: stack columns on small screens */
+@media (max-width: 640px) {
+  .footer-columns { grid-template-columns: 1fr; }
+  .footer-columns::before { display: none; }
+}
+
 
 /*=============================================
 =            CONTACT SECTION                  =
@@ -3125,6 +3290,7 @@ body.has-mouse .cartoon-eyes {
   z-index: 1;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
   transform: translate(var(--tx, 0), var(--ty, 0)) scale(1);
+  filter: grayscale(1) brightness(0.7);
   pointer-events: auto;
   will-change: transform;
   cursor: pointer;
@@ -3148,7 +3314,12 @@ body.has-mouse .cartoon-eyes {
 
 .testimonials .client-image .circular-photo.active {
   transform: translate(var(--tx, 0), var(--ty, 0)) scale(3);
+  filter: grayscale(0) brightness(1);
   z-index: 100 !important;
+}
+
+.testimonials .testimonial-content:hover .client-image .circular-photo {
+  filter: grayscale(0) brightness(1);
 }
 
 /* Remove CSS hover state to prevent conflicts with JavaScript */

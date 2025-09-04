@@ -447,6 +447,13 @@ body.preloader-active {
   font-weight: 700 !important;
 }
 
+/* Version number styling for patch notes */
+.testimonials h4 span[style*="font-family: monospace"] {
+   /* color: #1b1b1b !important; */
+  opacity: 0.4;
+  font-weight: 600;
+}
+
 #preloader.fade-out {
   opacity: 0;
   visibility: hidden;

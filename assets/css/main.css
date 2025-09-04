@@ -27,6 +27,8 @@
   --contrast-color: #310606;
 }
 
+
+
 /* Patch Notes Label Colors - For easy color management */
 :root {
   --patch-mix-ratio: 30%; /* Adjust this value to change all patch note color mixing */
@@ -1083,25 +1085,53 @@ section,
 }
 
 .about .cta-section .btn.btn-primary {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
   background-color: var(--accent-color);
   color: var(--contrast-color);
+  border-radius: 0.75rem;
+  text-decoration: none;
+  transition: all 0.3s;
+  border: 1px solid var(--accent-color);
+  font-weight: 600;
+  justify-content: flex-start;
+}
+
+/* When Download Resume button wraps to its own line, make it full width */
+@media (max-width: 576px) {
+  .about .cta-section .btn.btn-primary {
+    width: 100%;
+  }
 }
 
 .about .cta-section .btn.btn-primary:hover {
   background-color: color-mix(in srgb, var(--accent-color), black 15%);
   transform: translateY(-2px);
-  box-shadow: 0 10px 30px color-mix(in srgb, var(--accent-color), transparent 60%);
 }
 
 .about .cta-section .btn.btn-outline {
-  background-color: transparent;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background-color: color-mix(in srgb, var(--surface-color), var(--background-color) 50%);
+  border-radius: 0.75rem;
+  text-decoration: none;
   color: var(--default-color);
-  border-color: color-mix(in srgb, var(--default-color), transparent 70%);
+  transition: all 0.3s;
+  border: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
+  font-weight: 400 !important;
+  flex: 1;
+  justify-content: flex-start;
 }
 
 .about .cta-section .btn.btn-outline:hover {
-  border-color: var(--accent-color);
+  background-color: var(--accent-color);
+  color: var(--contrast-color);
   transform: translateY(-2px);
+  box-shadow: 0 5px 20px color-mix(in srgb, var(--accent-color), transparent 70%);
 }
 
 .description p {
@@ -3179,10 +3209,10 @@ body.has-mouse .cartoon-eyes {
   position: absolute;
   right: -55%;
   top: 0%;
-  transform: translateY(-50%) scale(0.98);
+  transform: translateY(-50%) translateX(100px) scale(0.98);
   width: 80%;
   opacity: 0;
-  transition: opacity 0.25s ease, transform 0.25s ease;
+  transition: all 0.8s ease-in-out;
   z-index: 3;
   background: transparent;
   padding: 0;
@@ -3198,28 +3228,10 @@ body.has-mouse .cartoon-eyes {
   filter: drop-shadow(0 8px 18px rgba(0,0,0,0.35));
 }
 
-#library-hours .once-bubble {
-  opacity: 0;
-  transform: translateX(500px) scale(0.1);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-  transition-delay: 1s;
-}
-
-#library-hours .once-bubble.show {
-  opacity: 1;
-  transform: translateX(0) scale(1);
-}
-
-#library-hours .once-bubble.fade {
-  opacity: 0;
-  transform: translateY(8px) scale(0.98);
-  transition-delay: 0s;
-}
-
-/* Hover effect to show cartoon quote - simple fade */
+/* Hover effect to show cartoon - slide in from right */
 #library-hours:hover .once-bubble {
   opacity: 1;
-  transition: opacity 0.3s ease;
+  transform: translateY(-50%) translateX(0) scale(0.98);
 }
 
 /* Mobile tweak */
@@ -3239,10 +3251,10 @@ body.has-mouse .cartoon-eyes {
   position: absolute;
   left: -50%;
   top: 20%;
-  transform: translateY(-50%) scale(0.98);
+  transform: translateY(-50%) translateX(-100px) scale(0.98);
   width: 80%;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: all 0.8s ease-in-out;
   z-index: 9999;
   background: transparent;
   padding: 0;
@@ -3258,9 +3270,10 @@ body.has-mouse .cartoon-eyes {
   filter: drop-shadow(0 8px 18px rgba(0,0,0,0.35));
 }
 
-/* Hover effect to show cartoon - simple fade */
+/* Hover effect to show cartoon - slide in from left */
 #domains-bridged:hover .once-bubble {
   opacity: 1;
+  transform: translateY(-50%) translateX(0) scale(0.98);
 }
 
 /* Mobile tweak for domains-bridged */
@@ -3852,20 +3865,70 @@ section,
 }
 
 /* Learn More label with clickable words */
-.about .contact-links .learn-more-label {
+.about .learn-more-section .learn-more-label {
   cursor: default;
   /* background-color: color-mix(in srgb, var(--contrast-color), transparent 80%); */
   background-color: color-mix(in srgb, var(--contrast-color), transparent 100%);;
-  border: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
+  border: 2px solid color-mix(in srgb, var(--default-color), transparent 90%);
+  color: color-mix(in srgb, var(--default-color), transparent 80%);
 }
-.about .contact-links .learn-more-label:hover {
+.about .learn-more-section .learn-more-label:hover {
   cursor: default;
   /* background-color: color-mix(in srgb, var(--contrast-color), transparent 80%); */
   background-color: color-mix(in srgb, var(--contrast-color), transparent 100%);;
-  border: 1px solid color-mix(in srgb, var(--default-color), transparent 100%);
-  color: var(--default-color);
+  border: 1px solid color-mix(in srgb, var(--default-color), transparent 96%);
+  
+  color: color-mix(in srgb, var(--default-color), transparent 80%);
   transform: none;
   box-shadow: none;
+}
+
+/* Learn More section styling to match Let's Talk button */
+.learn-more-section {
+  margin-top: 2rem;
+}
+
+/* Center the learn-more-section on mobile devices */
+@media (max-width: 768px) {
+  .learn-more-section {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.learn-more-section .learn-more-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.875rem 2rem;
+  background-color: transparent;
+  color: color-mix(in srgb, var(--default-color), transparent 20%);
+  border: 2px solid color-mix(in srgb, var(--default-color), transparent 98%);
+  border-radius: 0.75rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: default;
+  font-weight: 500;
+}
+
+.learn-more-section .learn-more-label:hover {
+  border-color: var(--accent-color);
+  transform: translateY(-2px);
+  background-color: transparent;
+  color: color-mix(in srgb, var(--default-color), transparent 80%);
+  color: var(--default-color);
+  box-shadow: 0 10px 30px color-mix(in srgb, var(--accent-color), transparent 60%);
+}
+
+/* Hover effect for clickable words in learn-more-section */
+.learn-more-section .clickable-word:hover {
+  background-color: var(--contrast-color) !important;
+  color: var(--contrast-color) !important;
+  text-decoration: none;
+  box-shadow: 0 0 15px 5px rgba(255,255,255,0.2);
+  font-weight: 800;
 }
 
 /* .about .contact-links .learn-more-label:hover {
@@ -3874,30 +3937,32 @@ section,
   box-shadow: none;
 } */
 
-.about .contact-links .clickable-word {
-  color: var(--accent-color);
+.about .learn-more-section .clickable-word {
+  color: color-mix(in srgb, var(--accent-color), transparent 60%);
   text-decoration: none;
   padding: 2px 6px;
   border-radius: 4px;
   transition: all 0.3s ease;
   position: relative;
   display: inline-block;
-  background-color: color-mix(in srgb, var(--surface-color), var(--background-color) 50%);
-  border: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
+  background-color: color-mix(in srgb, var(--contrast-color), var(--background-color) 80%);
+  border: 1px solid color-mix(in srgb, var(--default-color), transparent 95%);
 }
 
-.about .contact-links .learn-more-label:hover .clickable-word {
-  background-color: color-mix(in srgb, var(--contrast-color), transparent 20%);
+.about .learn-more-section .learn-more-label:hover .clickable-word {
+  background-color: var(--contrast-color);
   color: var(--accent-color);
   transform: scale(1.1);
   font-weight: 500;
 }
 
-.about .contact-links .learn-more-label:hover .clickable-word:hover {
+.about .learn-more-section .learn-more-label:hover .clickable-word:hover {
   background-color: var(--accent-color) !important;
-  transform: scale(1.5) !important;
+  transform: scale(1.3) !important;
   color: var(--contrast-color);
   text-decoration: none;
   box-shadow: 0 0 15px 5px rgba(255,255,255,0.2);
   font-weight: 800;
 }
+
+/* JavaScript handles tooltips with colored text */

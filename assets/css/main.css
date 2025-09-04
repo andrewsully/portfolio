@@ -85,6 +85,70 @@
 }
 
 /*=============================================
+=            DYNAMIC NAVBAR ANIMATIONS        =
+=============================================*/
+
+@keyframes fadeInSlide {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeOutSlide {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+}
+
+#patch-notes-nav-item {
+  transition: all 0.3s ease;
+}
+
+#patch-notes-nav-item.fade-out {
+  animation: fadeOutSlide 0.3s ease-out forwards;
+}
+
+/* Smooth transition for other navbar items when patch notes item appears/disappears */
+#navmenu li {
+  transition: transform 0.3s ease-out;
+}
+
+/* When patch notes item is visible, shift other items slightly */
+#navmenu.patch-notes-visible li:not(#patch-notes-nav-item) {
+  transform: translateX(0);
+}
+
+/* #patch-notes-nav-item a {
+  color: var(--contrast-color) !important;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+#patch-notes-nav-item a:hover {
+  color: color-mix(in srgb, var(--contrast-color), var(--accent-color) 40%) !important;
+} */
+
+/* When user is on other sections, revert to normal nav styling */
+/* #patch-notes-nav-item.nav-away a {
+  color: var(--nav-color) !important;
+  font-weight: normal;
+}
+
+#patch-notes-nav-item.nav-away a:hover {
+  color: var(--nav-hover-color) !important;
+} */
+
+/*=============================================
 =            BASE STYLES                     =
 =============================================*/
 
@@ -1024,7 +1088,7 @@ section,
 .about .about-content .description p {
   font-size: 1.1rem;
   line-height: 1.5;
-  color: color-mix(in srgb, var(--default-color), transparent 20%);
+  color: color-mix(in srgb, var(--default-color), transparent 50%);
   margin-bottom: 1.5rem;
 }
 
@@ -1040,11 +1104,24 @@ section,
   margin-bottom: 2.5rem;
 }
 
+/* Two-column layout: details left (40%), stats right (60%) */
+.about .about-info-row {
+  display: grid;
+  grid-template-columns: 1fr; /* stack as separate rows */
+  gap: 1.25rem;
+  align-items: start;
+}
+
+/* Stack detail items vertically in this layout */
+/* .about .about-info-row .details-grid .detail-row {
+  grid-template-columns: 1fr;
+} */
+
 .about .details-grid .detail-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem; /* equal spacing between rows */
 }
 
 .about .details-grid .detail-row:last-child {
@@ -1084,7 +1161,7 @@ section,
   border: 2px solid transparent;
 }
 
-.about .cta-section .btn.btn-primary {
+/* .about .cta-section .btn.btn-primary {
   display: flex;
   align-items: center;
   gap: 0.75rem;
@@ -1097,21 +1174,38 @@ section,
   border: 1px solid var(--accent-color);
   font-weight: 600;
   justify-content: flex-start;
+} */
+
+.about .new_footer {
+  margin-top: 2rem;
+  margin-bottom: 0rem;
+  text-align: center;
 }
 
-/* When Download Resume button wraps to its own line, make it full width */
-@media (max-width: 576px) {
-  .about .cta-section .btn.btn-primary {
-    width: 100%;
-  }
+.about .cta-section .btn.btn-primary {
+  background-color: var(--accent-color);
+  color: var(--contrast-color);
 }
 
 .about .cta-section .btn.btn-primary:hover {
   background-color: color-mix(in srgb, var(--accent-color), black 15%);
   transform: translateY(-2px);
+  box-shadow: 0 10px 30px color-mix(in srgb, var(--accent-color), transparent 60%);
 }
 
+
 .about .cta-section .btn.btn-outline {
+  background-color: transparent;
+  color: var(--default-color);
+  border-color: color-mix(in srgb, var(--default-color), transparent 70%);
+}
+
+.about .cta-section .btn.btn-outline:hover {
+  border-color: var(--accent-color);
+  transform: translateY(-2px);
+}
+
+/* .about .cta-section .btn.btn-outline {
   display: flex;
   align-items: center;
   gap: 0.75rem;
@@ -1132,7 +1226,7 @@ section,
   color: var(--contrast-color);
   transform: translateY(-2px);
   box-shadow: 0 5px 20px color-mix(in srgb, var(--accent-color), transparent 70%);
-}
+} */
 
 .description p {
   margin: 0 0 12px 0 !important;
@@ -1160,6 +1254,168 @@ section,
   .about .about-content .section-header h2 { font-size: 1.875rem; }
   .about .details-grid .detail-row { grid-template-columns: 1fr; gap: 1rem; }
   .about .container { padding-left: 12px; padding-right: 12px; }
+}
+.about .stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem 1.25rem;
+  /* padding: 1.25rem; */
+  /* padding-top: 2rem;  */
+  background-color: var(--surface-color);
+  border-radius: 1.25rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+/* Vertically center the header cell content */
+.about .stats-grid .header-item {
+  grid-column: 1 / -1; /* span across both columns */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about .stats-grid .header-item .stat-label {
+  width: 100%;
+  text-align: center;
+}
+
+@media (max-width: 992px) {
+  .about .about-info-row {
+    grid-template-columns: 1fr;
+  }
+  /* reset explicit column placement on small screens */
+  .about .about-info-row .stats-grid,
+  .about .about-info-row .details-grid {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .about .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    text-align: center;
+  }
+}
+
+.about .stats-grid .header-item .stat-label {
+  font-size: 1rem;
+  font-weight: 900;
+  line-height: 1.1;
+  color: var(--default-color);
+}
+
+/* Overlaid label in top-left of stats grid */
+.about .stats-grid .stats-grid-label {
+  position: absolute;
+  top: 10px;
+  left: 24px;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: color-mix(in srgb, var(--default-color), transparent 70%);
+  pointer-events: none;
+}
+
+/* Circle backdrop behind icon+label for the two items (not the header) */
+.about .stats-grid .stat-item {
+  /* no decorative background behind content */
+}
+
+.about .stats-grid .stat-item {
+  text-align: center;
+}
+
+.about .stats-grid .stat-item a.stat-item-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: inherit;
+  width: 6rem;
+  height: 6rem;
+  border-radius: 15%;
+  background-color: color-mix(in srgb, var(--surface-color), var(--background-color) 35%);
+  /* border: 2px solid color-mix(in srgb, var(--default-color), transparent 85%); */
+  box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+  transition: transform 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  cursor: pointer;
+  margin: 0 auto;
+  /* padding: 0.5rem; */
+}
+
+.about .stats-grid .stat-item a.stat-item-link:hover {
+  transform: translateY(-3px) scale(1.02);
+  background-color: color-mix(in srgb, var(--surface-color), var(--accent-color) 8%);
+  border-color: color-mix(in srgb, var(--accent-color), transparent 35%);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.10);
+}
+
+.about .stats-grid .stat-item a.stat-item-link:active {
+  transform: translateY(-1px) scale(0.99);
+}
+
+.about .stats-grid .stat-item a.stat-item-link:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-color), transparent 60%);
+  border-color: var(--accent-color);
+}
+
+/* Preserve icon and label layout within the clickable area */
+.about .stats-grid .stat-item a.stat-item-link .stat-number {
+  margin: 0 0 4px 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about .stats-grid .stat-item a.stat-item-link .stat-number::before {
+  content: "";
+  position: absolute;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background-color: var(--default-color);
+  z-index: 0;
+}
+
+.about .stats-grid .stat-item a.stat-item-link .stat-number i {
+  position: relative;
+  z-index: 1;
+  color: var(--background-color);
+  font-size: 1.25rem;
+}
+
+.about .stats-grid .stat-item a.stat-item-link .stat-number i {
+  font-size: 32px;
+}
+
+.about .stats-grid .stat-item a.stat-item-link .stat-label {
+  font-size: 0.8rem;
+  line-height: 1.2;
+  text-align: center;
+  /* padding: 0 6px; */
+}
+
+.about .stats-grid .stat-item a.stat-item-link:hover .stat-number {
+  /* icon color change handled by container hover */
+}
+
+.about .stats-grid .stat-item .stat-number {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent-color);
+  display: block;
+  /* margin-bottom: 0.5rem; */
+}
+
+.about .stats-grid .stat-item .stat-label {
+  font-size: 0.875rem;
+  color: color-mix(in srgb, var(--default-color), transparent 40%);
+  font-weight: 500;
 }
 
 /*=============================================
@@ -1212,7 +1468,7 @@ section,
   font-size: 48px;
   font-weight: 700;
   color: var(--heading-color);
-  margin-bottom: 10px;
+  margin-bottom: 0px;
   line-height: 1;
   font-family: var(--heading-font);
 }

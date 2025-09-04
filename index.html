@@ -88,8 +88,9 @@
           <li><a href="#about"><i class="bi bi-person navicon"></i> About</a></li>
           <li><a href="#resume"><i class="bi bi-file-earmark-text navicon"></i> Experience</a></li>
           <li><a href="#portfolio"><i class="bi bi-images navicon"></i> Projects</a></li>
-          <li><a href="#contact"><i class="bi bi-envelope navicon"></i> Contact</a></li>
-        </ul>
+          <li id="patch-notes-nav-item" style="display: none; opacity: 0;"><a href="#testimonials"><i class="bi bi-bug navicon"></i> Patch Notes</a></li>
+           <li><a href="#contact"><i class="bi bi-envelope navicon"></i> Contact</a></li>
+          </ul>
       </nav>
 
       <div class="social-links text-center">
@@ -124,7 +125,7 @@
             <div class="col-lg-6" data-aos="fade-right" data-aos-delay="100">
               <div class="hero-text">
                 <h1>Hi, I'm <span class="accent-text">Andrew</span>!</h1>
-                <p class="lead">I'm a <span class="typed" data-typed-items="Data Scientist, Product Analyst, Visualization Designer, Strategy Thinker"></span></p>
+                <p class="lead">I'm a <span class="typed" data-typed-items="Data Scientist, Machine Learning Engineer, Visualization Designer, Data Storyteller, Product Strategist, Innovation Catalyst"></span></p>
                 <p class="description">
                   To me, a dataset is more than numbers: it's <span class="highlight-text-secondary">a chorus of untold stories.</span> 
                   My passion lies in giving those stories a voice and transforming them into strategies that inspire real-world change.
@@ -170,7 +171,7 @@
       <div class="container" data-aos="fade-up" data-aos-delay="100">
 
         <div class="row">
-          <div class="col-lg-5" data-aos="zoom-in" data-aos-delay="200">
+          <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="200">
             <div class="profile-card">
               <div class="profile-header">
                 <div class="profile-image">
@@ -184,7 +185,7 @@
 
               <div class="profile-content">
                 <h3>Andrew Sullivan</h3>
-                <p class="profession">Boston, MA<br><span class="profession-sub">(Willing to Relocate)</span></p>
+                <p class="profession">MS in Data Science</p>
                 <div class="contact-links">
                   <a href="mailto:sullivan.j.andrew@gmail.com" class="contact-item">
                     <i class="bi bi-envelope"></i>
@@ -194,22 +195,17 @@
                     <i class="bi bi-telephone"></i>
                     +1 (781) 296-6009
                   </a>
-                  <div class="cta-section">
-                    <a href="#contact" class="btn btn-outline">
-                      <i class="bi bi-chat-dots"></i>
-                      Let's Talk
-                    </a>
-                    <a href="assets/Sullivan_Resume.pdf" class="btn btn-primary" download="Andrew_Sullivan_Resume.pdf">
-                      <i class="bi bi-download"></i>
-                      Download Resume
-                    </a>
-                  </div>
+                  <a href="https://www.google.com/maps/search/Boston+MA/" class="contact-item">
+                    <i class="bi bi-geo-alt"></i>
+                    Boston, MA <span class="profession-sub">(Willing to Relocate)</span>
+                  </a>
+                  
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="col-lg-7" data-aos="fade-left" data-aos-delay="300">
+          <div class="col-lg-8" data-aos="fade-left" data-aos-delay="300">
             <div class="about-content">
               <div class="section-header">
                 <span class="badge-text">My Approach</span>
@@ -223,42 +219,79 @@
                 <p><span class="highlight-text-secondary">When the next unfamiliar question arrives,</span> bring on a teammate who translates noise into direction. I turn ambiguity into clarity and data into decisions. <span class="highlight-text-primary">Together, we'll write the next story.</span></p>
 
               </div>
+              <div class="about-info-row">
+                <!-- <div class="stats-grid">
+                  <div class="stat-item">
+                    <a href="#portfolio" class="stat-item-link clickable-word" data-tooltip="Jump to my projects" data-highlight="projects">
+                      <div class="stat-number"><i class="bi bi-terminal-fill" style="scale: .8;"></i></div>
+                      <div class="stat-label">My Work</div>
+                    </a>
+                  </div>
+                  <div class="stat-item">
+                    <a href="#testimonials" class="stat-item-link clickable-word" data-tooltip="Jump to my personal patch notes" data-highlight="personal patch notes">
+                      <div class="stat-number"><i class="bi bi-person-bounding-box" style="scale: .75;"></i></div>
+                      <div class="stat-label">Myself</div>
+                    </a>
+                  </div>
+                  <div class="stat-item">
+                    <a href="#contact" class="stat-item-link clickable-word" data-tooltip="Jump to my contact info" data-highlight="contact info">
+                      <div class="stat-number"><i class="bi bi-chat-dots-fill" style="scale: .8;"></i></div>
+                      <div class="stat-label">Let's Talk</div>
+                    </a>
+                  </div>
+                </div> -->
 
-            
 
-              <div class="details-grid">
-                <div class="detail-row">
-                  <div class="detail-item">
-                    <span class="detail-label">Specialization</span>
-                    <span class="detail-value">Data Science &amp; Analytics</span>
+
+                <div class="details-grid">
+                  <div class="detail-row">
+                    <div class="detail-item">
+                      <span class="detail-label">Specialization</span>
+                      <span class="detail-value">Data Science &amp; Analytics</span>
+                    </div>
+                    <div class="detail-item">
+                      <span class="detail-label">Experience Level</span>
+                      <span class="detail-value">Early Career</span>
+                    </div>
                   </div>
-                  <div class="detail-item">
-                    <span class="detail-label">Experience Level</span>
-                    <span class="detail-value">Early Career</span>
-                  </div>
-                </div>
-                <div class="detail-row">
-                  <div class="detail-item">
-                    <span class="detail-label">Education</span>
-                    <span class="detail-value">Data Science, Harvard</span>
-                  </div>
-                  <div class="detail-item">
-                    <span class="detail-label">Languages</span>
-                    <span class="detail-value">English, Python, SQL, R</span>
+                  <div class="detail-row">
+                    <div class="detail-item">
+                      <span class="detail-label">Education</span>
+                      <span class="detail-value">Data Science, Harvard</span>
+                    </div>
+                    <div class="detail-item">
+                      <span class="detail-label">Languages</span>
+                      <span class="detail-value">English, Python, SQL, R</span>
+                    </div>
                   </div>
                 </div>
               </div>
-
-              <div class="learn-more-section">
-                <div class="learn-more-label">
-                  Learn more about <a href="#portfolio" class="clickable-word" data-tooltip="Jump to my projects" data-highlight="projects"><i class="bi bi-code-slash me-1"></i>my work</a>/<a href="#testimonials" class="clickable-word" data-tooltip="Jump to my personal patch notes" data-highlight="personal patch notes"><i class="bi bi-person-badge me-1"></i>myself</a>
-                </div>
+              
+              <div class="cta-section">
+                <!-- <a href="#contact" class="btn btn-outline">
+                  <i class="bi bi-chat-dots"></i>
+                  Let's Talk
+                </a> -->
+                <a href="assets/Sullivan_Resume.pdf" class="btn btn-primary" download="Andrew_Sullivan_Resume.pdf">
+                  <i class="bi bi-download"></i>
+                  Download Resume
+                </a>
+                <a href="#contact" class="btn btn-outline">
+                  <i class="bi bi-chat-dots"></i>
+                  Let's Talk
+                </a>
               </div>
+
+              
 
             </div>
+            
           </div>
         </div>
-
+        
+        
+        <div class="new_footer"><span class="profession-sub">Curious about the person behind the screen? Check out my 
+          <a href="#testimonials" class="fun-facts-link">fun facts <i class="bi bi-arrow-up-right"></i></a>, written patch-note style.</span></div>
       </div>
 
     </section><!-- End About Section -->
@@ -2452,7 +2485,7 @@ document.addEventListener('DOMContentLoaded', () => {
   (() => {
     // Custom tooltip functionality with colored text
     function createCustomTooltips() {
-      const clickableWords = document.querySelectorAll('.learn-more-section .clickable-word');
+      const clickableWords = document.querySelectorAll('.clickable-word');
       
       clickableWords.forEach(link => {
         let tooltip = null;
@@ -2493,9 +2526,9 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Create tooltip content with colored text
             if (highlight === 'projects') {
-              tooltip.innerHTML = 'Jump to my <span style="color: ' + highlightColor + ';">projects</span>';
+              tooltip.innerHTML = 'Jump to my <span style="color: ' + highlightColor + ';">projects</span> <i class="bi bi-fast-forward-fill"></i>';
             } else if (highlight === 'personal patch notes') {
-              tooltip.innerHTML = 'Jump to my <span style="color: ' + highlightColor + ';">personal patch notes</span>';
+              tooltip.innerHTML = 'Jump to my <span style="color: ' + highlightColor + ';">personal patch notes</span> <i class="bi bi-fast-forward-fill"></i>';
             }
             
             // Position the tooltip relative to the link
@@ -2542,6 +2575,85 @@ document.addEventListener('DOMContentLoaded', () => {
       document.addEventListener('DOMContentLoaded', createCustomTooltips);
     } else {
       createCustomTooltips();
+    }
+  })();
+  </script>
+
+  <!-- =======================================================
+  * DYNAMIC NAVBAR ITEM FOR FUN FACTS
+  ======================================================== -->
+  <script>
+  (() => {
+    console.log('Dynamic navbar script starting...');
+    
+    const patchNotesNavItem = document.getElementById('patch-notes-nav-item');
+    const collapsibleSection = document.getElementById('collapsable-aboutme');
+    
+    console.log('patchNotesNavItem:', patchNotesNavItem);
+    console.log('collapsibleSection:', collapsibleSection);
+    
+    if (patchNotesNavItem && collapsibleSection) {
+      console.log('Both elements found, adding event listeners...');
+      
+      // Show navbar item when section is expanded
+      collapsibleSection.addEventListener('shown.bs.collapse', () => {
+        console.log('Debug section expanded, showing navbar item...');
+        patchNotesNavItem.style.display = 'block';
+        patchNotesNavItem.style.opacity = '1';
+        patchNotesNavItem.style.animation = 'fadeInSlide 0.9s ease-out';
+        patchNotesNavItem.classList.remove('nav-away');
+        document.getElementById('navmenu').classList.add('patch-notes-visible');
+      });
+      
+      // Hide navbar item when section is collapsed
+      collapsibleSection.addEventListener('hidden.bs.collapse', () => {
+        console.log('Debug section collapsed, hiding navbar item...');
+        patchNotesNavItem.classList.add('fade-out');
+        document.getElementById('navmenu').classList.remove('patch-notes-visible');
+        setTimeout(() => {
+          patchNotesNavItem.style.display = 'none';
+          patchNotesNavItem.classList.remove('fade-out');
+        }, 300);
+      });
+      
+      // Monitor scroll to detect when user leaves testimonials section
+      window.addEventListener('scroll', () => {
+        // Check if the section is currently expanded
+        const isExpanded = collapsibleSection.classList.contains('show');
+        if (!isExpanded) return;
+        
+        const testimonialsSection = document.getElementById('testimonials');
+        if (!testimonialsSection) return;
+        
+        const rect = testimonialsSection.getBoundingClientRect();
+        const isInView = rect.top < window.innerHeight && rect.bottom > 0;
+        
+        if (!isInView) {
+          // User has scrolled away from testimonials
+          patchNotesNavItem.classList.add('nav-away');
+        } else {
+          // User is back in testimonials
+          patchNotesNavItem.classList.remove('nav-away');
+        }
+      });
+      
+      // Hide navbar item when user navigates away from testimonials
+      const navLinks = document.querySelectorAll('#navmenu a');
+      navLinks.forEach(link => {
+        if (link.getAttribute('href') !== '#testimonials') {
+          link.addEventListener('click', () => {
+            console.log('Hiding patch notes nav item...');
+            patchNotesNavItem.classList.add('fade-out');
+            document.getElementById('navmenu').classList.remove('patch-notes-visible');
+            setTimeout(() => {
+              patchNotesNavItem.style.display = 'none';
+              patchNotesNavItem.classList.remove('fade-out');
+            }, 300);
+          });
+        }
+      });
+    } else {
+      console.log('Missing elements:', { patchNotesNavItem: !!patchNotesNavItem, collapsibleSection: !!collapsibleSection });
     }
   })();
   </script>

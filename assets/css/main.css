@@ -4048,7 +4048,11 @@ body.has-mouse .cartoon-eyes {
 }
 
 .aboutme-photo {
-  padding: 2.25rem;
+
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 2.25rem;
+  padding-bottom: 2.25rem;
 }
 
 /* Scroll margin for smooth scrolling */
@@ -4261,3 +4265,6 @@ section,
   text-decoration: underline !important;
 }
 
+.new-title-section {
+  padding: 2.25rem;
+}

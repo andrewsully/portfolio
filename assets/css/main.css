@@ -4222,3 +4222,42 @@ section,
 }
 
 /* JavaScript handles tooltips with colored text */
+
+/* Custom footer styling */
+.new_footer .profession-sub {
+  font-size: 1rem !important;
+}
+
+/* Fun facts link styling */
+.fun-facts-link {
+  color: color-mix(in srgb, #4DA6FF, transparent 60%) !important;
+  font-weight: 700 !important;
+
+
+}
+
+.fun-facts-link:hover {
+  color: color-mix(in srgb, #4DA6FF, transparent 0%) !important;
+  /* color: color-mix(in srgb, var(--default-color), transparent 0%) !important;
+  text-decoration-color: color-mix(in srgb, #f2c14b, transparent 20%) !important;
+  text-decoration-thickness: 0.3rem !important; */
+  text-decoration: underline !important;
+}
+
+/* Fun facts link styling */
+.link-resume-btn {
+  color: color-mix(in srgb, #4DA6FF, transparent 10%) !important;
+  font-weight: 700 !important;
+
+
+
+}
+
+.link-resume-btn:hover {
+  color: color-mix(in srgb, #4DA6FF, transparent 0%) !important;
+  /* color: color-mix(in srgb, var(--default-color), transparent 0%) !important;
+  text-decoration-color: color-mix(in srgb, #f2c14b, transparent 20%) !important;
+  text-decoration-thickness: 0.3rem !important; */
+  text-decoration: underline !important;
+}
+

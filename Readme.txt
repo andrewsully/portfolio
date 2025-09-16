@@ -1,6 +1,5 @@
-Thanks for downloading this template!
+# Andrew Sullivan's Portfolio
 
-Template Name: SnapFolio
+This is my personal portfolio website showcasing my work as a Data Scientist.
+
 Template URL: https://bootstrapmade.com/snapfolio-bootstrap-portfolio-template/
-Author: BootstrapMade.com
-License: https://bootstrapmade.com/license/
